@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevMora | Aldi Raihan</title>
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Inter:ital,opsz,wght@0,14..32,100..900:1,14..32,100..900&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "TWK Lausanne", "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 7rem;
+            font-weight: 400;
+            letter-spacing: -0.2rem;
+            line-height: 1;
+        }
+
+        a,
+        p {
+            position: relative;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 300;
+            user-select: none;
+        }
+
+        nav {
+            position: fixed;
+            width: 100vw;
+            padding: 2.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .logo a {
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            position: relative;
+            width: 3rem;
+            height: 1.5rem;
+            cursor: pointer;
+        }
+
+        .menu-toggle p {
+            position: absolute;
+            transform-origin: top left;
+            will-change: transform, opacity;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            width: 100vw;
+            height: 100svh;
+            background-color: #313131;
+            background-image: url("images/bg-menu.png");
+            z-index: 1;
+        }
+
+        .menu-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: left bottom;
+            will-change: transform, opacity;
+        }
+
+        .menu-items,
+        .menu-footer {
+            width: 100%;
+            padding: 2.5em;
+            display: flex;
+            gap: 2.5em;
+        }
+
+        .col-lg {
+            flex: 3;
+        }
+
+        .col-sm {
+            flex: 2;
+        }
+
+        .menu-items .col-lg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-preview-img {
+            position: relative;
+            width: 45%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .menu-preview-img img {
+            position: absolute;
+            will-change: transform, opacity;
+        }
+
+        .menu-items .col-sm {
+            padding: 2.5em 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5em;
+        }
+
+        .menu-links,
+        .menu-socials {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .link,
+        .social {
+            padding-bottom: 6px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .link a,
+        .social a {
+            display: inline-block;
+            will-change: transform;
+            transition: color 0.5s;
+        }
+
+        .link a {
+            font-size: 3.5rem;
+            letter-spacing: -0.02rem;
+        }
+
+        .social a {
+            color: #8f8f8f;
+        }
+
+        .social a:hover {
+            color: #fff;
+        }
+
+        .menu-footer {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .menu-footer .col-sm {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .link a::after,
+        .social a::after,
+        .menu-footer a::after {
+            position: absolute;
+            content: "";
+            top: 102.5%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+        }
+
+        .link a:hover::after,
+        .social a:hover::after,
+        .menu-footer a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+            transform-origin: right top;
+        }
+
+        .hero {
+            position: relative;
+            width: 100vw;
+            height: 100svh;
+            padding: 2.5em;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100svh;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            width: 80%;
+        }
+
+        .menu-toggle p#menu-close {
+            opacity: 0;
+            transform: translateX(-5px) translateY(10px) rotate(5deg);
+        }
+
+        .link a,
+        .social a {
+            transform: translateY(120%);
+            opacity: 0.25;
+        }
+
+        .menu-content {
+            transform: translateX(-100px) translateY(-100px) scale(1.5) rotate(-15deg);
+            opacity: 0.25;
+        }
+
+        .menu-overlay {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 {
+                width: 100%;
+                font-size: 4rem;
+                letter-spacing: 0;
+            }
+
+            .menu-items .col-lg {
+                display: none;
+            }
+
+            .link a::after,
+            .social a::after,
+            .menu-footer a::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="#">DevMora</a>
+        </div>
+        <div class="menu-toggle">
+            <p id="menu-open">Menu</p>
+            <p id="menu-close">Close</p>
+        </div>
+    </nav>
+
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <div class="menu-items">
+                <div class="col-lg">
+                    <div class="menu-preview-img">
+                        <img src="images/bg-menu.jpg" alt="Preview" />
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="menu-links">
+                        <div class="link">
+                            <a href="#" data-img="images/build-1.jpg">Home</a>
+                        </div>
+                        <div class="link">
+                            <a href="#" data-img="images/build-2.jpg">About</a>
+                        </div>
+                        <div class="link">
+                            <a href="#" data-img="images/build-3.jpg">Portfolio</a>
+                        </div>
+                        <div class="link">
+                            <a href="#" data-img="images/build-4.jpg">Contact</a>
+                        </div>
+                        <div class="menu-socials">
+                            <div class="social"><a href="#">WhatsApp</a></div>
+                            <div class="social"><a href="#">Instagram</a></div>
+                            <div class="social"><a href="#">Gmail</a></div>
+                            <div class="social"><a href="#">Yahoo</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-footer">
+                <div class="col-lg">
+                    <a href="#">Run Sequence</a>
+                </div>
+                <div class="col-sm">
+                    <a href="#">Origin</a>
+                    <a href="#">Join Signal</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-img">
+                <img src="images/dashboard.jpg" alt="">
+            </div>
+
+            <h1>Aldi Raihan</h1>
+        </section>
+    </div>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.querySelector(".container");
+            const menuToggle = document.querySelector(".menu-toggle");
+            const menuOverlay = document.querySelector(".menu-overlay");
+            const menuContent = document.querySelector(".menu-content");
+            const menuLinks = document.querySelectorAll(".link a");
+            const menuPreviewImg = document.querySelector(".menu-preview-img");
+
+            const openBtn = document.querySelector("#menu-open");
+            const closeBtn = document.querySelector("#menu-close");
+
+            let isOpen = false;
+            let isAnimating = false;
+
+            // Fungsi reset preview image
+            function resetPreviewImage() {
+                menuPreviewImg.innerHTML = "";
+            }
+
+            // Fungsi hapus gambar lama tapi simpan yang terakhir
+            function cleanupPreviewImages() {
+                const images = menuPreviewImg.querySelectorAll("img");
+                if (images.length > 1) images[0].remove();
+            }
+
+            // Tampilkan gambar default (gambar Home) saat menu dibuka
+            function showDefaultPreview() {
+                resetPreviewImage();
+                const defaultImgSrc = menuLinks[0].getAttribute("data-img"); // Home
+                const img = document.createElement("img");
+                img.src = defaultImgSrc;
+                img.style.opacity = "0";
+                img.style.transform = "scale(1.25) rotate(10deg)";
+                img.style.position = "absolute";
+                img.style.top = "0";
+                img.style.left = "0";
+                img.style.width = "100%";
+                img.style.height = "100%";
+                menuPreviewImg.appendChild(img);
+                gsap.to(img, {
+                    opacity: 1,
+                    scale: 1,
+                    rotation: 0,
+                    duration: 0.75,
+                    ease: "power2.out",
+                });
+            }
+
+            // Toggle button animasi
+            function animateMenuToggle(isOpening) {
+                gsap.to(isOpening ? openBtn : closeBtn, {
+                    x: isOpening ? -5 : 5,
+                    y: isOpening ? -10 : 10,
+                    rotation: isOpening ? -5 : 5,
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                });
+                gsap.to(isOpening ? closeBtn : openBtn, {
+                    x: 0,
+                    y: 0,
+                    rotation: 0,
+                    opacity: 1,
+                    delay: 0.3,
+                    duration: 0.5,
+                    ease: "power2.out",
+                });
+            }
+
+            // Fungsi buka menu
+            function openMenu() {
+                if (isAnimating || isOpen) return;
+                isAnimating = true;
+
+                animateMenuToggle(true);
+
+                gsap.to(container, {
+                    rotation: 10,
+                    x: 300,
+                    y: 450,
+                    scale: 1.5,
+                    duration: 1.25,
+                    ease: "power4.inOut",
+                });
+                gsap.to(menuOverlay, {
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                    duration: 1.25,
+                    ease: "power4.inOut",
+                });
+                gsap.to(menuContent, {
+                    rotation: 0,
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.25,
+                    ease: "power4.inOut",
+                });
+                gsap.to([".link a", ".social a"], {
+                    y: "0%",
+                    opacity: 1,
+                    duration: 1,
+                    delay: 0.75,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                });
+
+                // Tampilkan default image saat menu dibuka
+                showDefaultPreview();
+
+                isOpen = true;
+                isAnimating = false;
+            }
+
+            // Fungsi tutup menu
+            function closeMenu() {
+                if (isAnimating || !isOpen) return;
+                isAnimating = true;
+
+                animateMenuToggle(false);
+
+                gsap.to(container, {
+                    rotation: 0,
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    duration: 1.25,
+                    ease: "power4.inOut",
+                });
+                gsap.to(menuOverlay, {
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+                    duration: 1.25,
+                    ease: "power4.inOut",
+                    onComplete: () => {
+                        isOpen = false;
+                        isAnimating = false;
+                        gsap.set([".link a", ".social a"], {
+                            y: "120%"
+                        });
+                        resetPreviewImage();
+                    },
+                });
+                gsap.to(menuContent, {
+                    rotation: -15,
+                    x: -100,
+                    y: -100,
+                    scale: 1.5,
+                    opacity: 0.25,
+                    duration: 1.25,
+                    ease: "power4.inOut",
+                });
+                gsap.to([".link a", ".social a"], {
+                    y: "120%",
+                    opacity: 0.25,
+                    duration: 0.5,
+                    stagger: 0.05,
+                });
+            }
+
+            // Event toggle menu
+            menuToggle.addEventListener("click", () => {
+                if (!isOpen) openMenu();
+                else closeMenu();
+            });
+
+            // Hover effect untuk ganti gambar
+            menuLinks.forEach((link) => {
+                link.addEventListener("mouseover", () => {
+                    if (!isOpen || isAnimating) return;
+
+                    const imgSrc = link.getAttribute("data-img");
+                    if (!imgSrc) return;
+
+                    const previewImages = menuPreviewImg.querySelectorAll("img");
+
+                    // skip jika gambar sama
+                    if (
+                        previewImages.length > 0 &&
+                        previewImages[previewImages.length - 1].src.endsWith(imgSrc)
+                    )
+                        return;
+
+                    const newPreviewImg = document.createElement("img");
+                    newPreviewImg.src = imgSrc;
+                    newPreviewImg.style.opacity = "0";
+                    newPreviewImg.style.transform = "scale(1.25) rotate(10deg)";
+                    newPreviewImg.style.position = "absolute";
+                    newPreviewImg.style.top = "0";
+                    newPreviewImg.style.left = "0";
+                    newPreviewImg.style.width = "100%";
+                    newPreviewImg.style.height = "100%";
+
+                    menuPreviewImg.appendChild(newPreviewImg);
+                    cleanupPreviewImages();
+
+                    gsap.to(newPreviewImg, {
+                        opacity: 1,
+                        scale: 1,
+                        rotation: 0,
+                        duration: 0.75,
+                        ease: "power2.out",
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
