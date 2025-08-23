@@ -72,6 +72,8 @@
             will-change: transform, opacity;
         }
 
+        /*--------------------- SIDE BAR MENU ---------------------*/
+
         .menu-overlay {
             position: fixed;
             width: 100vw;
@@ -352,7 +354,7 @@
             }
         }
 
-        /* -------------PORTFOLIO ------------ */
+        /* ------------- PORTFOLIO ------------ */
 
         .section__title {
             color: white;
@@ -373,7 +375,7 @@
 
         .section--columns {
             position: relative;
-            min-height: 200vh;
+            min-height: auto;
             padding: 10vh 0;
             width: 100vw;
             overflow: hidden;
@@ -466,6 +468,139 @@
                 /* jarak vertikal lebih lega di hp kecil */
             }
         }
+
+        /* ------------- CURRICULUM VITAE ------------ */
+
+        .paper-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 10000px;
+            flex-direction: column;
+            /*background: rgb(31, 31, 31);*/
+        }
+
+        .paper-container {
+            width: 520px;
+            height: 680px;
+            position: relative;
+            transform-style: preserve-3d;
+            margin-top: 100vh;
+        }
+
+        .fold {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 33.333%;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            background: #fff;
+        }
+
+        .fold1 {
+            top: 0;
+            transform-origin: top center;
+            z-index: 3;
+        }
+
+        .fold2 {
+            top: 33.333%;
+            transform-origin: top center;
+            z-index: 2;
+        }
+
+        .fold3 {
+            top: 66.666%;
+            transform-origin: top center;
+            z-index: 1;
+        }
+
+        /* overlay shadow efek lipatan */
+        .fold::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+            opacity: 0.6;
+        }
+
+        .fold img {
+            width: 100%;
+            height: 680px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fold1 img {
+            transform: translateY(0%);
+        }
+
+        .fold2 img {
+            transform: translateY(-33.333%);
+        }
+
+        .fold3 img {
+            transform: translateY(-66.666%);
+        }
+
+        .content {
+            min-height: 200vh;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        /* ======================= */
+        /* RESPONSIVE MOBILE/TABLET */
+        /* ======================= */
+
+        /* Tablet */
+        @media screen and (max-width: 768px) {
+            .paper-container {
+                width: 400px;
+                height: 520px;
+                margin-top: 120vh;
+            }
+
+            .fold img {
+                height: 520px;
+            }
+
+            .content h2 {
+                font-size: 1.5rem;
+            }
+
+            .content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile */
+        @media screen and (max-width: 480px) {
+            .paper-container {
+                width: 300px;
+                height: 400px;
+                margin-top: 125vh;
+            }
+
+            .fold img {
+                height: 400px;
+            }
+
+            .content h2 {
+                font-size: 1.2rem;
+            }
+
+            .content p {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -524,52 +659,9 @@
     </div>
 
     <div class="container">
-        <!-- <section class="hero">
-            <div class="hero-img">
-                <img src="images/dashboard-2.jpg" alt="">
-            </div>
-            <h1>Aldi Raihan</h1>
-        </section> -->
 
-        <!-- About Section -->
-        <!-- <section class="about-me" id="about">
-            <div class="about-content">
-                <div class="about-photo">
-                    <img src="images/profile.png" alt="Profile">
-                </div>
-
-                <h2 class="about-title">About Me</h2>
-                <p class="about-desc">
-                    I’m <span class="highlight">Aldi Raihan</span>, a professional
-                    <span class="highlight">Web Developer</span> specializing in creating
-                    modern, responsive, and visually engaging websites.
-                    With strong experience in <span class="highlight">UI/UX Design</span>,
-                    I aim to craft digital products that balance aesthetics and functionality.
-                </p>
-
-                <div class="about-grid">
-                    <div class="about-card">
-                        <h3>Skills</h3>
-                        <ul>
-                            <li>Frontend: HTML, CSS, JavaScript, React</li>
-                            <li>Backend: Node.js, PHP, Laravel</li>
-                            <li>Design: Figma, Adobe XD</li>
-                        </ul>
-                    </div>
-
-                    <div class="about-card">
-                        <h3>Experience</h3>
-                        <p>
-                            3+ years of experience working on web projects ranging from
-                            personal portfolios to corporate platforms.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- Intro -->
-        <section style="background-color: rgb(31, 31, 31); padding: 50px 0;">
+        <!-- portofolio -->
+        <section style="background-color: rgb(31, 31, 31); padding: 0px 0;">
             <section class="section--intro">
                 <h2 class="section__title">MY<br>PORTO</h2>
                 <p>Since 2k21 - 2k24</p>
@@ -579,40 +671,48 @@
             <section class="section--columns">
                 <div class="columns-inner">
                     <div class="column-wrap">
-                        <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
-                        <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
-                        <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
-                        <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                        <div class="column__item"><img src="images/porto-1.png" alt="Build 1"></div>
+                        <div class="column__item"><img src="images/porto-2.png" alt="Build 2"></div>
+                        <div class="column__item"><img src="images/porto-3.png" alt="Build 3"></div>
+                        <div class="column__item"><img src="images/porto-4.png" alt="Build 4"></div>
                     </div>
 
                     <div class="column-wrap">
-                        <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
-                        <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
-                        <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
-                        <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                        <div class="column__item"><img src="images/porto-2.png" alt="Build 2"></div>
+                        <div class="column__item"><img src="images/porto-3.png" alt="Build 3"></div>
+                        <div class="column__item"><img src="images/porto-4.png" alt="Build 4"></div>
+                        <div class="column__item"><img src="images/porto-1.png" alt="Build 1"></div>
                     </div>
 
                     <div class="column-wrap">
-                        <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
-                        <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
-                        <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
-                        <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                        <div class="column__item"><img src="images/porto-3.png" alt="Build 3"></div>
+                        <div class="column__item"><img src="images/porto-4.png" alt="Build 4"></div>
+                        <div class="column__item"><img src="images/porto-1.png" alt="Build 1"></div>
+                        <div class="column__item"><img src="images/porto-2.png" alt="Build 2"></div>
                     </div>
 
                     <div class="column-wrap">
-                        <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
-                        <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
-                        <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
-                        <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                        <div class="column__item"><img src="images/porto-4.png" alt="Build 4"></div>
+                        <div class="column__item"><img src="images/porto-1.png" alt="Build 1"></div>
+                        <div class="column__item"><img src="images/porto-2.png" alt="Build 2"></div>
+                        <div class="column__item"><img src="images/porto-3.png" alt="Build 3"></div>
                     </div>
                 </div>
-            </section> <!-- Footer -->
-            <footer style="background-color: #1f1f1f; color: #aaa; text-align: center; font-size: 0.9rem;">
-                <p>© 2025 <strong>Aldi Raihan</strong> | <em>devmora</em>. All rights reserved.</p>
+            </section>
 
-            </footer>
+            <!-- curriculum vitae -->
+            <section class="paper-section">
+                <div class="paper-container">
+                    <div class="fold fold1"><img src="images/paper.png" alt="Fold 1"></div>
+                    <div class="fold fold2"><img src="images/paper.png" alt="Fold 2"></div>
+                    <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
+                </div>
+                <div class="content">
+                    <!-- <h2>Aldi Raihan | Curriculum Vitae</h2>
+                <p>--- Curriculum Vitae</p> -->
+                </div>
+            </section>
         </section>
-
 
 
     </div>
@@ -921,6 +1021,63 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Set awal: lipatan tertutup rapat
+        gsap.set(".fold1", { rotationX: -90, scaleY: 0.05 });
+        gsap.set(".fold2", { rotationX: -90, opacity: 0 });
+        gsap.set(".fold3", { rotationX: -90, opacity: 0 });
+
+        // Fold 1
+        gsap.to(".fold1", {
+            rotationX: 0,
+            scaleY: 1,
+            scrollTrigger: {
+                trigger: ".paper-section",
+                start: "top top",
+                end: "top+=300 top",
+                scrub: 1
+            }
+        });
+
+        // Fold 2
+        gsap.fromTo(".fold2",
+            { rotationX: -90, opacity: 0 },
+            {
+                rotationX: 0,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: ".paper-section",
+                    start: "top+=300 top",
+                    end: "top+=600 top",
+                    scrub: 1,
+                    onUpdate: self => {
+                        gsap.set(".fold2", { opacity: self.progress > 0 ? 1 : 0 });
+                    }
+                }
+            }
+        );
+
+        // Fold 3
+        gsap.fromTo(".fold3",
+            { rotationX: -90, opacity: 0 },
+            {
+                rotationX: 0,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: ".paper-section",
+                    start: "top+=600 top",
+                    end: "top+=900 top",
+                    scrub: 1,
+                    onUpdate: self => {
+                        gsap.set(".fold3", { opacity: self.progress > 0 ? 1 : 0 });
+                    }
+                }
+            }
+        );
     </script>
 </body>
 
