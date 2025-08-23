@@ -253,6 +253,88 @@
             clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
         }
 
+        /* ABOUT ME */
+
+        .about-me {
+            padding: 6rem 2rem 8rem;
+            /* atas 6rem, samping 2rem, bawah 8rem */
+            background-color: #0f0f0f;
+            /* gelap biar kontras */
+            color: #f5f5f5;
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: violet;
+            /* aksen violet */
+            position: relative;
+        }
+
+        .about-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: violet;
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .about-desc {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: violet;
+            font-weight: 600;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(138, 43, 226, 0.4);
+            /* violet glow */
+        }
+
+        .about-card h3 {
+            color: violet;
+            margin-bottom: 1rem;
+        }
+
+        .about-photo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid violet;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+
+
         @media (max-width: 900px) {
             .hero h1 {
                 width: 100%;
@@ -310,7 +392,6 @@
                             <div class="social"><a href="#">WhatsApp</a></div>
                             <div class="social"><a href="#">Instagram</a></div>
                             <div class="social"><a href="#">Gmail</a></div>
-                            <div class="social"><a href="#">Yahoo</a></div>
                         </div>
                     </div>
                 </div>
@@ -333,10 +414,106 @@
             <div class="hero-img">
                 <img src="images/dashboard-2.jpg" alt="">
             </div>
-
             <h1>Aldi Raihan</h1>
         </section>
+
+        <!-- About Section -->
+        <section class="about-me" id="about">
+            <div class="about-content">
+                <!-- Foto profil -->
+                <div class="about-photo">
+                    <img src="images/profile.png" alt="Profile">
+                </div>
+
+                <h2 class="about-title">About Me</h2>
+                <p class="about-desc">
+                    I’m <span class="highlight">Aldi Raihan</span>, a professional
+                    <span class="highlight">Web Developer</span> specializing in creating
+                    modern, responsive, and visually engaging websites.
+                    With strong experience in <span class="highlight">UI/UX Design</span>,
+                    I aim to craft digital products that balance aesthetics and functionality.
+                </p>
+
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>Skills</h3>
+                        <ul>
+                            <li>Frontend: HTML, CSS, JavaScript, React</li>
+                            <li>Backend: Node.js, PHP, Laravel</li>
+                            <li>Design: Figma, Adobe XD</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-card">
+                        <h3>Experience</h3>
+                        <p>
+                            3+ years of experience working on web projects ranging from
+                            personal portfolios to corporate platforms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // animasi foto profil
+        gsap.from(".about-photo img", {
+            scrollTrigger: {
+                trigger: ".about-photo",
+                start: "top 80%", // mulai animasi saat 80% viewport
+            },
+            y: 100,
+            opacity: 0,
+            scale: 0.8,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // animasi judul
+        gsap.from(".about-title", {
+            scrollTrigger: {
+                trigger: ".about-title",
+                start: "top 85%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // animasi deskripsi
+        gsap.from(".about-desc", {
+            scrollTrigger: {
+                trigger: ".about-desc",
+                start: "top 85%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: "power3.out"
+        });
+
+        // animasi card grid
+        gsap.from(".about-card", {
+            scrollTrigger: {
+                trigger: ".about-grid",
+                start: "top 85%",
+            },
+            y: 80,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+    </script>
+
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
