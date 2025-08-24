@@ -7,6 +7,8 @@
     <title>DevMora | Aldi Raihan</title>
     <link rel="stylesheet" href="css/styles.css" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+
     <style>
         @import url("https://fonts.googleapis.com/css?family=Inter:ital,opsz,wght@0,14..32,100..900:1,14..32,100..900&display=swap");
 
@@ -384,13 +386,15 @@
         /* ------------- CURRICULUM VITAE ------------ */
 
         .paper-section {
+            padding-top: 10vh;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 10000px;
             flex-direction: column;
-            /*background: rgb(31, 31, 31);*/
+            background: rgb(31, 31, 31);
+
         }
 
         .paper-container {
@@ -462,10 +466,17 @@
         }
 
         .content {
-            min-height: 200vh;
             padding: 3rem;
             text-align: center;
             color: white;
+            font-family: 'Cedarville Cursive', cursive;
+        }
+
+        .content h2 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            /* Cedarville default agak tipis */
+            letter-spacing: 1px;
         }
 
         /* ======================= */
@@ -564,12 +575,25 @@
 
     <div class="container">
 
+
+        <!-- curriculum vitae -->
+        <section class="paper-section">
+            <div class="paper-container">
+                <div class="fold fold1"><img src="images/paper.png" alt="Fold 1"></div>
+                <div class="fold fold2"><img src="images/paper.png" alt="Fold 2"></div>
+                <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
+            </div>
+            <div class="content">
+                <h2>My Curriculum Vitae</h2>
+            </div>
+        </section>
+
         <!-- portofolio -->
         <section style="background-color: rgb(31, 31, 31); padding: 0px 0;">
-            <section class="section--intro">
+            <!-- <section class="section--intro">
                 <h2 class="section__title">MY<br>PORTO</h2>
                 <p>Since 2k21 - 2k24</p>
-            </section>
+            </section> -->
 
             <section class="section--columns">
                 <div class="columns-inner">
@@ -600,19 +624,6 @@
                         <div class="column__item"><img src="images/porto-2.png" alt="Build 2"></div>
                         <div class="column__item"><img src="images/porto-3.png" alt="Build 3"></div>
                     </div>
-                </div>
-            </section>
-
-            <!-- curriculum vitae -->
-            <section class="paper-section">
-                <div class="paper-container">
-                    <div class="fold fold1"><img src="images/paper.png" alt="Fold 1"></div>
-                    <div class="fold fold2"><img src="images/paper.png" alt="Fold 2"></div>
-                    <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
-                </div>
-                <div class="content">
-                    <h2>Aldi Raihan | Curriculum Vitae</h2>
-                    <p>--- Curriculum Vitae</p>
                 </div>
             </section>
         </section>
@@ -964,6 +975,41 @@
             }
         );
     </script>
+
+    <!-- ANIMATE FOR TEXT -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Split text jadi huruf per huruf
+        const text = document.querySelector(".content h2");
+        const splitText = text.textContent.split("");
+        text.textContent = "";
+
+        splitText.forEach((char) => {
+            let span = document.createElement("span");
+            span.textContent = char;
+            span.style.opacity = 0;
+            span.style.display = "inline-block";
+            text.appendChild(span);
+        });
+
+        // Animasi berjalan saat discroll (lebih cepat & sensitif baliknya)
+        gsap.to(".content h2 span", {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,       // lebih singkat lagi
+            ease: "power2.out",
+            stagger: 0.025,      // lebih cepat antar huruf
+            scrollTrigger: {
+                trigger: ".content h2",
+                start: "top 95%",   // mulai lebih awal (lebih sensitif)
+                end: "top 70%",     // area trigger kecil → cepat balik
+                toggleActions: "play reverse play reverse",
+                scrub: 0.2          // animasi nempel scroll, jadi langsung kebalik
+            }
+        });
+    </script>
+
 </body>
 
 </html>
