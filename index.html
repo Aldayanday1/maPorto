@@ -255,105 +255,6 @@
             clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
         }
 
-        /*--------------------- ABOUT ME ---------------------*/
-
-        .about-me {
-            padding: 6rem 2rem 8rem;
-            /* atas 6rem, samping 2rem, bawah 8rem */
-            background-color: #0f0f0f;
-            /* gelap biar kontras */
-            color: #f5f5f5;
-        }
-
-        .about-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: violet;
-            /* aksen violet */
-            position: relative;
-        }
-
-        .about-title::after {
-            content: "";
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: violet;
-            margin: 0.5rem auto;
-            border-radius: 2px;
-        }
-
-        .about-desc {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .highlight {
-            color: violet;
-            font-weight: 600;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .about-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .about-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(138, 43, 226, 0.4);
-            /* violet glow */
-        }
-
-        .about-card h3 {
-            color: violet;
-            margin-bottom: 1rem;
-        }
-
-        .about-photo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .about-photo img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid violet;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-        }
-
-        @media (max-width: 900px) {
-            .hero h1 {
-                width: 100%;
-                font-size: 4rem;
-                letter-spacing: 0;
-            }
-
-            .menu-items .col-lg {
-                display: none;
-            }
-
-            .link a::after,
-            .social a::after,
-            .menu-footer a::after {
-                display: none;
-            }
-        }
-
         /* ------------- PORTFOLIO ------------ */
 
         .section__title {
@@ -451,7 +352,7 @@
             }
 
             .section--columns {
-                min-height: 250vh;
+                min-height: 1vh;
             }
         }
 
@@ -466,6 +367,17 @@
                 /* biar 2 kolom saja di hp kecil */
                 gap: 5vw;
                 /* jarak vertikal lebih lega di hp kecil */
+            }
+
+            .column__item {
+                aspect-ratio: 1/1;
+                /* jadi kotak persegi */
+                height: auto;
+                /* override tinggi default */
+            }
+
+            .section--columns {
+                min-height: 1vh;
             }
         }
 
@@ -486,7 +398,7 @@
             height: 680px;
             position: relative;
             transform-style: preserve-3d;
-            margin-top: 100vh;
+            margin-top: 35vh;
         }
 
         .fold {
@@ -565,7 +477,7 @@
             .paper-container {
                 width: 400px;
                 height: 520px;
-                margin-top: 120vh;
+                margin-top: 35vh;
             }
 
             .fold img {
@@ -586,7 +498,7 @@
             .paper-container {
                 width: 300px;
                 height: 400px;
-                margin-top: 125vh;
+                margin-top: 35vh;
             }
 
             .fold img {
@@ -615,6 +527,7 @@
         </div>
     </nav>
 
+    <!-- sidebar menu -->
     <div class="menu-overlay">
         <div class="menu-content">
             <div class="menu-items">
@@ -646,15 +559,6 @@
                 </div>
             </div>
 
-            <!-- <div class="menu-footer">
-                <div class="col-lg">
-                    <a href="#">Run Sequence</a>
-                </div>
-                <div class="col-sm">
-                    <a href="#">Origin</a>
-                    <a href="#">Join Signal</a>
-                </div>
-            </div> -->
         </div>
     </div>
 
@@ -667,7 +571,6 @@
                 <p>Since 2k21 - 2k24</p>
             </section>
 
-            <!-- Columns -->
             <section class="section--columns">
                 <div class="columns-inner">
                     <div class="column-wrap">
@@ -708,76 +611,18 @@
                     <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
                 </div>
                 <div class="content">
-                    <!-- <h2>Aldi Raihan | Curriculum Vitae</h2>
-                <p>--- Curriculum Vitae</p> -->
+                    <h2>Aldi Raihan | Curriculum Vitae</h2>
+                    <p>--- Curriculum Vitae</p>
                 </div>
             </section>
         </section>
-
-
     </div>
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
 
-        // animasi foto profil
-        gsap.from(".about-photo img", {
-            scrollTrigger: {
-                trigger: ".about-photo",
-                start: "top 80%", // mulai animasi saat 80% viewport
-            },
-            y: 100,
-            opacity: 0,
-            scale: 0.8,
-            duration: 1,
-            ease: "power3.out"
-        });
-
-        // animasi judul
-        gsap.from(".about-title", {
-            scrollTrigger: {
-                trigger: ".about-title",
-                start: "top 85%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out"
-        });
-
-        // animasi deskripsi
-        gsap.from(".about-desc", {
-            scrollTrigger: {
-                trigger: ".about-desc",
-                start: "top 85%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            delay: 0.3,
-            ease: "power3.out"
-        });
-
-        // animasi card grid
-        gsap.from(".about-card", {
-            scrollTrigger: {
-                trigger: ".about-grid",
-                start: "top 85%",
-            },
-            y: 80,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-        });
-    </script>
-
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
+    <!-- SIDEBAR MENU GSAP -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const container = document.querySelector(".container");
@@ -986,6 +831,7 @@
         });
     </script>
 
+    <!-- PORTO -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
@@ -1026,19 +872,58 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Set awal: lipatan tertutup rapat
-        gsap.set(".fold1", { rotationX: -90, scaleY: 0.05 });
+        // Awal: kertas hilang total
+        gsap.set(".paper-container", { opacity: 0 });
+        gsap.set(".fold1", { rotationX: -90 });
         gsap.set(".fold2", { rotationX: -90, opacity: 0 });
         gsap.set(".fold3", { rotationX: -90, opacity: 0 });
+
+        // =========================
+        // Konfigurasi per device
+        // =========================
+        let foldSpeed;
+
+        if (window.innerWidth <= 480) {
+            // 📱 Mobile → super cepat banget
+            foldSpeed = {
+                fold1: { start: "top+=10 top", end: "top+=30 top" },
+                fold2: { start: "top+=30 top", end: "top+=55 top" },
+                fold3: { start: "top+=55 top", end: "top+=80 top" }
+            };
+        } else if (window.innerWidth <= 768) {
+            // 📲 Tablet → lebih cepat
+            foldSpeed = {
+                fold1: { start: "top+=20 top", end: "top+=45 top" },
+                fold2: { start: "top+=45 top", end: "top+=75 top" },
+                fold3: { start: "top+=75 top", end: "top+=105 top" }
+            };
+        } else {
+            // 💻 Desktop → tetap normal
+            foldSpeed = {
+                fold1: { start: "top+=40 top", end: "top+=100 top" },
+                fold2: { start: "top+=100 top", end: "top+=160 top" },
+                fold3: { start: "top+=160 top", end: "top+=220 top" }
+            };
+        }
+
+        // Fade-in container
+        gsap.to(".paper-container", {
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".paper-section",
+                start: "top top",
+                end: foldSpeed.fold1.start,
+                scrub: 1
+            }
+        });
 
         // Fold 1
         gsap.to(".fold1", {
             rotationX: 0,
-            scaleY: 1,
             scrollTrigger: {
                 trigger: ".paper-section",
-                start: "top top",
-                end: "top+=300 top",
+                start: foldSpeed.fold1.start,
+                end: foldSpeed.fold1.end,
                 scrub: 1
             }
         });
@@ -1051,8 +936,8 @@
                 opacity: 1,
                 scrollTrigger: {
                     trigger: ".paper-section",
-                    start: "top+=300 top",
-                    end: "top+=600 top",
+                    start: foldSpeed.fold2.start,
+                    end: foldSpeed.fold2.end,
                     scrub: 1,
                     onUpdate: self => {
                         gsap.set(".fold2", { opacity: self.progress > 0 ? 1 : 0 });
@@ -1069,8 +954,8 @@
                 opacity: 1,
                 scrollTrigger: {
                     trigger: ".paper-section",
-                    start: "top+=600 top",
-                    end: "top+=900 top",
+                    start: foldSpeed.fold3.start,
+                    end: foldSpeed.fold3.end,
                     scrub: 1,
                     onUpdate: self => {
                         gsap.set(".fold3", { opacity: self.progress > 0 ? 1 : 0 });

@@ -28,7 +28,7 @@
             height: 680px;
             position: relative;
             transform-style: preserve-3d;
-            margin-top: 100vh;
+            margin-top: 25vh;
         }
 
         .fold {
@@ -170,14 +170,14 @@
         gsap.set(".fold2", { rotationX: -90, opacity: 0 });
         gsap.set(".fold3", { rotationX: -90, opacity: 0 });
 
-        // Fold 1
+        // Fold 1 (super cepat)
         gsap.to(".fold1", {
             rotationX: 0,
             scaleY: 1,
             scrollTrigger: {
                 trigger: ".paper-section",
                 start: "top top",
-                end: "top+=300 top",
+                end: "top+=60 top", // sangat singkat
                 scrub: 1
             }
         });
@@ -190,8 +190,8 @@
                 opacity: 1,
                 scrollTrigger: {
                     trigger: ".paper-section",
-                    start: "top+=300 top",
-                    end: "top+=600 top",
+                    start: "top+=60 top",
+                    end: "top+=120 top", // singkat
                     scrub: 1,
                     onUpdate: self => {
                         gsap.set(".fold2", { opacity: self.progress > 0 ? 1 : 0 });
@@ -208,8 +208,8 @@
                 opacity: 1,
                 scrollTrigger: {
                     trigger: ".paper-section",
-                    start: "top+=600 top",
-                    end: "top+=900 top",
+                    start: "top+=120 top",
+                    end: "top+=180 top", // singkat
                     scrub: 1,
                     onUpdate: self => {
                         gsap.set(".fold3", { opacity: self.progress > 0 ? 1 : 0 });
