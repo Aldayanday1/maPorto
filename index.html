@@ -35,7 +35,7 @@
         }
 
         .section--columns {
-            margin-top: 5vh;
+            margin-top: 19vh;
             position: relative;
             min-height: 100vh;
             padding: 10vh 0;
@@ -282,6 +282,15 @@
         }
 
         @media (max-width: 1000px) {
+            .copy-container {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
             .copy-container h1 {
                 width: 90%;
                 font-size: 2.5rem;
@@ -293,7 +302,7 @@
             }
 
             .anime-text p {
-                font-size: 2rem;
+                font-size: 1rem;
                 line-height: 2.2rem;
                 /* jangan terlalu kecil */
             }
@@ -531,7 +540,6 @@
             }
         });
 
-
         // gerakan kolom biar dinamis
         gsap.utils.toArray(".column-wrap").forEach((col, i) => {
             gsap.to(col, {
@@ -547,19 +555,18 @@
         });
 
         gsap.fromTo(".section--outro",
-            { y: 80, opacity: 0 }, // start turun & transparan
+            { y: 150, opacity: 0 },
             {
-                y: 0,
-                opacity: 1,
-                duration: 1,
-                ease: "power3.out",
+                y: 0, opacity: 1, ease: "power3.out",
                 scrollTrigger: {
                     trigger: ".section--outro",
-                    start: () => "top+=" + window.innerHeight + " bottom", // hitung posisi relatif
-                    toggleActions: "play none none reverse"
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 20  // 0.5 detik smoothing
                 }
             }
         );
+
 
     </script>
 
