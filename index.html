@@ -4,466 +4,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - About Me + Paper CV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <title>Scroll Panels Effect</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: "DM Sans", sans-serif;
-            background-color: #1a1a1a;
+            margin: 0;
+            font-family: sans-serif;
+            background: #0f0e0e;
+            color: #fff;
             overflow-x: hidden;
-            max-width: 100%;
         }
 
-        /* ===== ABOUT ME ===== */
-        section {
+        .section__title {
+            font-weight: 300;
+            font-size: clamp(2rem, 17vw, 12.5rem);
+            margin: 5vh 0 6vh;
+            line-height: 0.9;
+            text-transform: none;
+            text-align: center;
+        }
+
+        .section--intro {
+            background: #2e2e2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section--columns {
             position: relative;
+            min-height: 200vh;
+            padding: 10vh 0;
             width: 100vw;
-            height: 100svh;
-            padding: 2em;
             overflow: hidden;
-        }
-
-        .copy-container {
-            width: 100%;
-            height: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-radius: 2rem;
         }
 
-        .about .copy-container {
-            position: relative;
-            border: 0.15rem dashed rgb(60, 60, 60);
-            border-radius: 2rem;
-            padding-top: 3rem;
+        .columns-inner {
+            margin-top: -55rem;
+            margin-bottom: 10%;
+            display: flex;
+            gap: 1vw;
+            /* jarak antar kolom lebih rapat */
+            width: 200vw;
+            /* lebarkan container biar muat banyak kolom */
+            transform: rotate(-45deg);
+            transform-origin: center center;
         }
 
-        .about .copy-container::before {
-            content: "About Me";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%);
-            font-family: 'Cedarville Cursive', cursive;
-            font-weight: 400;
-            font-size: 2rem;
-            color: #fff;
-            background-color: #1a1a1a;
-            padding: 0 1rem;
+        .column-wrap {
+            flex: none;
+            /* jangan stretch otomatis */
+            width: 20vw;
+            /* setiap kolom lebih kecil */
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
         }
 
-        .anime-text {
-            width: 60%;
-            background-color: transparent;
-        }
-
-        .anime-text p {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-        }
-
-        .anime-text .word {
-            display: inline-block;
-            position: relative;
-            margin: 0.25rem 0.25rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 10rem;
-            will-change: background-color, opacity;
-        }
-
-        .anime-text .word.keyword-wrapper {
-            margin: 0 0.4rem 0.2rem 0.2rem;
-        }
-
-        .anime-text .word span.keyword {
-            display: inline-block;
-            border-radius: 2rem;
-            padding: 0.1rem 0;
-            color: #141414;
-            position: relative;
-        }
-
-        .anime-text .word span.keyword::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: calc(100% + 1rem);
-            height: calc(100% + 0.4rem);
-            background-color: #fff;
-            border-radius: 2rem;
-            z-index: -1;
-        }
-
-        .anime-text .word,
-        .anime-text .word span {
+        .column__item {
+            width: 100%;
+            height: 30vh;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transform: scale(0.9);
             opacity: 0;
         }
 
-        .hand-icon {
-            width: 3rem;
-            height: auto;
-            vertical-align: middle;
-            margin-left: 0.3rem;
-            position: relative;
-            top: -0.4rem;
-        }
-
-        @media (max-width: 1000px) {
-            .copy-container h1 {
-                width: 90%;
-                font-size: 2.5rem;
-                /* sedikit lebih besar */
-            }
-
-            /* Teks “About Me” di atas garis */
-            .about .copy-container::before {
-                font-size: 1rem;
-            }
-
-            .anime-text {
-                width: 90%;
-            }
-
-            .anime-text p {
-                font-size: 1rem;
-                line-height: 2.2rem;
-                /* jangan terlalu kecil */
-            }
-
-            .anime-text .word {
-                margin-right: -0.15rem;
-                margin-bottom: 0.2rem;
-            }
-
-            .hand-icon {
-                width: 2.5rem;
-                /* sedikit lebih kecil */
-                top: -0.3rem;
-            }
-
-            .anime-text .word.keyword-wrapper {
-                margin: 0 0.2rem 0.4rem;
-                /* margin kanan dan bawah lebih besar */
-            }
-
-            .anime-text .word span.keyword::before {
-                width: calc(100% + 1rem);
-                /* lebih lebar */
-                height: calc(100% + 0.1rem);
-                /* lebih tinggi */
-            }
-        }
-
-        /* ===== PAPER CV ===== */
-        .paper-section {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 10000px;
-            flex-direction: column;
-            padding: 4rem 1rem;
-        }
-
-        .paper-container {
-            width: 520px;
-            height: 680px;
-            position: relative;
-            transform-style: preserve-3d;
-            margin-bottom: 2rem;
-        }
-
-        .fold {
-            position: absolute;
-            left: 0;
+        .column__item img {
             width: 100%;
-            height: 33.333%;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            background: #fff;
-        }
-
-        .fold1 {
-            top: 0;
-            transform-origin: top center;
-            z-index: 3;
-        }
-
-        .fold2 {
-            top: 33.333%;
-            transform-origin: top center;
-            z-index: 2;
-        }
-
-        .fold3 {
-            top: 66.666%;
-            transform-origin: top center;
-            z-index: 1;
-        }
-
-        .fold img {
-            width: 100%;
-            height: 680px;
+            height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        .fold::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .fold1 img {
-            transform: translateY(0%);
-        }
-
-        .fold2 img {
-            transform: translateY(-33.333%);
-        }
-
-        .fold3 img {
-            transform: translateY(-66.666%);
-        }
-
-        .content {
-            padding-bottom: 4vh;
-            text-align: center;
-            color: #fff;
-            font-family: 'Cedarville Cursive', cursive;
-
-        }
-
-        .content h2 {
+        .section--outro {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2rem;
         }
 
-        .content p {
-            font-size: 2rem;
-            opacity: 0.8;
-        }
-
-        /* responsive */
+        /* ======================= */
+        /* RESPONSIVE MOBILE */
+        /* ======================= */
         @media (max-width: 768px) {
-            .paper-container {
-                width: 400px;
-                height: 520px;
+            .columns-inner {
+                width: 140vw;
+                /* kasih lebar ekstra biar muat rotasi */
+                gap: 5vw;
+                /* jarak antar kolom */
             }
 
-            .fold img {
-                height: 520px;
+            .column-wrap {
+                flex: none;
+                width: 45vw;
+                /* biar cuma 2 kolom pas mobile */
+                gap: 5vw;
+                /* JARAK VERTIKAL antar card ditambah */
+            }
+
+            .column__item {
+                aspect-ratio: 1/1;
+                /* jadi kotak persegi */
+                height: auto;
+                /* override tinggi default */
+            }
+
+            .section--columns {
+                min-height: 250vh;
             }
         }
 
         @media (max-width: 480px) {
-            .paper-container {
-                width: 300px;
-                height: 400px;
+            .columns-inner {
+                width: 160vw;
+                /* makin lebar di hp kecil */
             }
 
-            .fold img {
-                height: 400px;
+            .column-wrap {
+                width: 60vw;
+                /* biar 2 kolom saja di hp kecil */
+                gap: 5vw;
+                /* jarak vertikal lebih lega di hp kecil */
             }
+        }
+
+        .section--outro {
+            margin-top: -280rem;
+            min-height: 200vh;
+            /* lebih panjang */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            /* biar konten dari atas */
+            padding: 5vh 0;
+            font-size: 1rem;
+            background: #0f0e0e;
+            color: #ffffff;
+        }
+
+        .outro-inner {
+            margin-top: 5rem;
+            display: flex;
+            gap: 2vw;
+            flex-wrap: wrap;
+            /* otomatis turun ke bawah */
+            justify-content: center;
+            width: 90%;
+        }
+
+        .outro-wrap {
+            flex: 1 1 20%;
+            /* fleksibel tapi rata */
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            min-width: 200px;
+        }
+
+        .outro__item {
+            width: 100%;
+            height: 25vh;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .outro__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
 
 <body>
+    <!-- Intro -->
+    <section class="section--intro">
+        <h2 class="section__title">MY<br>PORTO</h2>
+        <p>Since 2k21 - 2k24</p>
+    </section>
 
-    <!-- ABOUT ME -->
-    <section class="about anime-text-container">
-        <div class="copy-container">
-            <div class="anime-text">
-                <p>
-                    <span class="word">
-                        Hi
-                        <img src="images/hands.png" alt="hand wave" class="hand-icon">
-                    </span>
-                    I'm Mochamad Aldi Raihan Fachrizal, a fresh graduate and <span class="keyword">fullstack</span> web
-                    & mobile
-                    developer, passionate about building elegant and functional digital solutions — always learning,
-                    always
-                    creating.
-                </p>
+    <!-- Card Porto -->
+    <section class="section--columns">
+        <div class="columns-inner">
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+            </div>
+
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+            </div>
+
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Outro / Halaman Terakhir -->
+    <section class="section--outro">
+        <h2 class="section__title">THANK YOU!</h2>
+        <p>See more of my works soon.</p>
+
+        <div class="outro-inner">
+            <div class="outro-wrap">
+                <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+            </div>
+            <div class="outro-wrap">
+                <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+            </div>
+            <div class="outro-wrap">
+                <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
             </div>
         </div>
     </section>
 
-    <!-- PAPER CV -->
-    <section class="paper-section">
-        <div class="content">
-            <p>Curriculum Vitae</p>
-        </div>
-        <div class="paper-container">
-            <div class="fold fold1"><img src="images/paper.png" alt="Fold 1"></div>
-            <div class="fold fold2"><img src="images/paper.png" alt="Fold 2"></div>
-            <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
-        </div>
 
-    </section>
-
-    <!-- GSAP -->
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
+    <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        document.addEventListener("DOMContentLoaded", () => {
-            // Smooth Scroll (Lenis)
-            const lenis = new Lenis();
-            lenis.on("scroll", ScrollTrigger.update);
-            gsap.ticker.add((time) => {
-                lenis.raf(time * 1000);
-            });
-            gsap.ticker.lagSmoothing(0);
-
-            // ===============================
-            // ABOUT ME TEXT ANIMATION
-            // ===============================
-            const animeTextParagraphs = document.querySelectorAll(".anime-text p");
-            const wordHighlightBgColor = "60, 60, 60";
-            const keywords = ["fullstack", "web", "mobile"];
-
-            animeTextParagraphs.forEach((paragraph) => {
-                const text = paragraph.textContent.trim();
-                paragraph.innerHTML = "";
-                const words = text.split(/\s+/);
-                let isFirst = true;
-
-                words.forEach((word, idx) => {
-                    const span = document.createElement("span");
-                    span.className = "word";
-                    span.style.backgroundColor = `rgba(${wordHighlightBgColor}, 0)`;
-
-                    if (isFirst && word.toLowerCase() === "hi") {
-                        span.textContent = "Hi there! ";
-                        const img = document.createElement("img");
-                        img.src = "images/hands.png";
-                        img.alt = "hand wave";
-                        img.className = "hand-icon";
-                        span.appendChild(img);
-                        isFirst = false;
-                    } else {
-                        span.textContent = word;
+        // animasi tiap item
+        gsap.utils.toArray(".column__item").forEach((item) => {
+            gsap.fromTo(item,
+                { y: 100, opacity: 0, scale: 0.9 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
                     }
+                }
+            );
+        });
 
-                    const normalizedWord = word.toLowerCase().replace(/[.,!?;:"]/g, "");
-                    if (keywords.includes(normalizedWord)) {
-                        span.classList.add("keyword-wrapper");
-                        const keywordSpan = document.createElement("span");
-                        keywordSpan.className = "keyword";
-                        keywordSpan.textContent = word;
-                        span.innerHTML = "";
-                        span.appendChild(keywordSpan);
-                    }
-
-                    paragraph.appendChild(span);
-                    paragraph.appendChild(document.createTextNode(" "));
-                });
-            });
-
-            const animeTextContainers = document.querySelectorAll(".anime-text-container");
-            animeTextContainers.forEach((container) => {
-                ScrollTrigger.create({
-                    trigger: container,
-                    pin: true,
-                    start: "top top",
-                    end: "+=200%",
-                    scrub: true,
-                    onUpdate: (self) => {
-                        const progress = self.progress;
-                        const words = Array.from(container.querySelectorAll(".anime-text .word"));
-                        const totalWords = words.length;
-                        const overlapWords = 8;
-                        const lastWordEnd = (totalWords - 1 + overlapWords) / totalWords;
-
-                        words.forEach((word, index) => {
-                            const wordText = word.querySelector("span") || word;
-                            const wordStart = index / totalWords / lastWordEnd;
-                            const wordEnd = (index + overlapWords) / totalWords / lastWordEnd;
-                            const duration = wordEnd - wordStart;
-
-                            let wordProgress =
-                                progress <= wordStart ? 0 :
-                                    progress >= wordEnd ? 1 :
-                                        (progress - wordStart) / duration;
-
-                            word.style.opacity = wordProgress;
-
-                            const backgroundFadeStart = wordProgress >= 0.9 ? (wordProgress - 0.9) / 0.1 : 0;
-                            const backgroundOpacity = Math.max(0, 1 - backgroundFadeStart);
-                            word.style.backgroundColor = `rgba(${wordHighlightBgColor}, ${backgroundOpacity})`;
-
-                            const textRevealThreshold = 0.9;
-                            const textRevealProgress =
-                                wordProgress < textRevealThreshold ? wordProgress / textRevealThreshold : 1;
-
-                            wordText.style.opacity = Math.pow(textRevealProgress, 0.5);
-                        });
-                    }
-                });
-            });
-
-            // ===============================
-            // PAPER CV FOLD ANIMATION
-            // ===============================
-            let totalScroll;
-            if (window.innerWidth <= 480) {
-                totalScroll = 150; // mobile agak panjang
-            } else if (window.innerWidth <= 768) {
-                totalScroll = 180; // tablet
-            } else {
-                totalScroll = 250; // desktop
-            }
-
-            gsap.set(".paper-container", { opacity: 0 });
-            gsap.set(".fold1", { rotationX: -90 });
-            gsap.set(".fold2", { rotationX: -90 });
-            gsap.set(".fold3", { rotationX: -90 });
-
-            let tl = gsap.timeline({
+        // gerakan kolom biar dinamis
+        gsap.utils.toArray(".column-wrap").forEach((col, i) => {
+            gsap.to(col, {
+                yPercent: i % 2 === 0 ? -15 : 15,
+                ease: "none",
                 scrollTrigger: {
-                    trigger: ".paper-section",
-                    start: "top center",   // mulai saat paper masuk tengah layar
-                    end: `+=${totalScroll}`,
-                    scrub: true,
+                    trigger: ".section--columns",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
                 }
             });
-
-            tl.to(".paper-container", { opacity: 1, duration: 0.3 })
-                .to(".fold1", { rotationX: 0, duration: 1 })
-                .to(".fold2", { rotationX: 0, duration: 1 })
-                .to(".fold3", { rotationX: 0, duration: 1 });
-
-
-            ScrollTrigger.refresh();
         });
-    </script>
 
+        gsap.fromTo(".section--outro",
+            { y: "100%" }, // awal di bawah
+            {
+                y: "0%",
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".section--outro",
+                    start: "top bottom",   // mulai saat bagian bawah layar
+                    end: "top top",        // berhenti ketika outro sudah penuh layar
+                    scrub: true,           // animasi ikut scroll hanya di range ini
+                    pin: false             // tidak dipin, biar lanjut normal
+                }
+            }
+        );
+
+    </script>
 </body>
 
 </html>

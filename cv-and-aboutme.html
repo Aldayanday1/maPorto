@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teks Subtittle</title>
+    <title>Portfolio - About Me + Paper CV</title>
     <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
@@ -22,6 +22,7 @@
             max-width: 100%;
         }
 
+        /* ===== ABOUT ME ===== */
         section {
             position: relative;
             width: 100vw;
@@ -40,50 +41,30 @@
             border-radius: 2rem;
         }
 
-        .copy-container h1 {
-            width: 70%;
-            color: #141414;
-            font-size: 5rem;
-            font-weight: 900;
-            line-height: 1;
-        }
-
         .about .copy-container {
             position: relative;
-            /* penting untuk positioning teks */
             border: 0.15rem dashed rgb(60, 60, 60);
-            /* garis putus */
             border-radius: 2rem;
             padding-top: 3rem;
-            /* beri ruang untuk teks di atas garis */
         }
 
-        /* Teks “About Me” di atas garis */
         .about .copy-container::before {
             content: "About Me";
-            /* teks yang diinginkan */
             position: absolute;
             top: 0;
-            /* posisi di atas garis */
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
-            /* tengah horizontal & sedikit ke atas */
             font-family: 'Cedarville Cursive', cursive;
-            /* pakai font Cedarville Cursive */
             font-weight: 400;
             font-size: 2rem;
             color: #fff;
-            /* warna teks */
             background-color: #1a1a1a;
-            /* agar teks mengambang di atas garis */
             padding: 0 1rem;
-            /* beri ruang agar teks tidak menempel ke garis */
         }
 
         .anime-text {
             width: 60%;
             background-color: transparent;
-            /* atau #1a1a1a kalau mau menutupi */
         }
 
         .anime-text p {
@@ -92,15 +73,14 @@
             margin-bottom: 2rem;
             font-size: 3.5rem;
             font-weight: 900;
-            line-height: 1;
+            line-height: 1.1;
         }
 
         .anime-text .word {
             display: inline-block;
             position: relative;
-            margin-right: 0.2rem;
-            margin-bottom: 0.2rem;
-            padding: 0.1rem 0.2rem;
+            margin: 0.25rem 0.25rem;
+            padding: 0.2rem 0.4rem;
             border-radius: 10rem;
             will-change: background-color, opacity;
         }
@@ -109,17 +89,12 @@
             margin: 0 0.4rem 0.2rem 0.2rem;
         }
 
-        .anime-text .word span {
-            position: relative;
-        }
-
         .anime-text .word span.keyword {
             display: inline-block;
-            width: 100%;
-            height: 100%;
             border-radius: 2rem;
             padding: 0.1rem 0;
             color: #141414;
+            position: relative;
         }
 
         .anime-text .word span.keyword::before {
@@ -156,12 +131,17 @@
                 /* sedikit lebih besar */
             }
 
+            /* Teks “About Me” di atas garis */
+            .about .copy-container::before {
+                font-size: 1rem;
+            }
+
             .anime-text {
                 width: 90%;
             }
 
             .anime-text p {
-                font-size: 2rem;
+                font-size: 1rem;
                 line-height: 2.2rem;
                 /* jangan terlalu kecil */
             }
@@ -189,13 +169,130 @@
                 /* lebih tinggi */
             }
         }
+
+        /* ===== PAPER CV ===== */
+        .paper-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 10000px;
+            flex-direction: column;
+            padding: 4rem 1rem;
+        }
+
+        .paper-container {
+            width: 520px;
+            height: 680px;
+            position: relative;
+            transform-style: preserve-3d;
+            margin-bottom: 2rem;
+        }
+
+        .fold {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 33.333%;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            background: #fff;
+        }
+
+        .fold1 {
+            top: 0;
+            transform-origin: top center;
+            z-index: 3;
+        }
+
+        .fold2 {
+            top: 33.333%;
+            transform-origin: top center;
+            z-index: 2;
+        }
+
+        .fold3 {
+            top: 66.666%;
+            transform-origin: top center;
+            z-index: 1;
+        }
+
+        .fold img {
+            width: 100%;
+            height: 680px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fold::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .fold1 img {
+            transform: translateY(0%);
+        }
+
+        .fold2 img {
+            transform: translateY(-33.333%);
+        }
+
+        .fold3 img {
+            transform: translateY(-66.666%);
+        }
+
+        .content {
+            padding-bottom: 4vh;
+            text-align: center;
+            color: #fff;
+            font-family: 'Cedarville Cursive', cursive;
+
+        }
+
+        .content h2 {
+            font-size: 2rem;
+        }
+
+        .content p {
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .paper-container {
+                width: 400px;
+                height: 520px;
+            }
+
+            .fold img {
+                height: 520px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .paper-container {
+                width: 300px;
+                height: 400px;
+            }
+
+            .fold img {
+                height: 400px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <section></section>
 
-    <!-- ABOUT ME ANIMATION TEXT -->
+    <!-- ABOUT ME -->
     <section class="about anime-text-container">
         <div class="copy-container">
             <div class="anime-text">
@@ -204,28 +301,39 @@
                         Hi
                         <img src="images/hands.png" alt="hand wave" class="hand-icon">
                     </span>
-                    I'm Mochamad Aldi Raihan Fachrizal, a fresh graduate and <span class="keyword">fullstack</span>
-                    web
-                    & mobile developer,
-                    passionate about building elegant and functional digital solutions — always learning, always
+                    I'm Mochamad Aldi Raihan Fachrizal, a fresh graduate and <span class="keyword">fullstack</span> web
+                    & mobile
+                    developer, passionate about building elegant and functional digital solutions — always learning,
+                    always
                     creating.
                 </p>
             </div>
         </div>
     </section>
 
-    <section></section>
+    <!-- PAPER CV -->
+    <section class="paper-section">
+        <div class="content">
+            <p>Curriculum Vitae</p>
+        </div>
+        <div class="paper-container">
+            <div class="fold fold1"><img src="images/paper.png" alt="Fold 1"></div>
+            <div class="fold fold2"><img src="images/paper.png" alt="Fold 2"></div>
+            <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
+        </div>
 
-    <!-- GSAP & Plugins -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    </section>
+
+    <!-- GSAP -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
         document.addEventListener("DOMContentLoaded", () => {
-            // Smooth scroll pakai Lenis
+            // Smooth Scroll (Lenis)
             const lenis = new Lenis();
             lenis.on("scroll", ScrollTrigger.update);
             gsap.ticker.add((time) => {
@@ -233,36 +341,24 @@
             });
             gsap.ticker.lagSmoothing(0);
 
+            // ===============================
+            // ABOUT ME TEXT ANIMATION
+            // ===============================
             const animeTextParagraphs = document.querySelectorAll(".anime-text p");
-
-            // Warna highlight dasar (abu-abu gelap)
             const wordHighlightBgColor = "60, 60, 60";
-
-            // Kata kunci yang diwarnai khusus
-            const keywords = [
-                "fullstack",
-                "web",
-                "mobile",
-                "laravel",
-                "flutter",
-                "spring"
-            ];
+            const keywords = ["fullstack", "web", "mobile"];
 
             animeTextParagraphs.forEach((paragraph) => {
                 const text = paragraph.textContent.trim();
                 paragraph.innerHTML = "";
-
                 const words = text.split(/\s+/);
                 let isFirst = true;
 
                 words.forEach((word, idx) => {
                     const span = document.createElement("span");
                     span.className = "word";
-                    span.style.backgroundColor = `rgba(${wordHighlightBgColor}, 0)`; // default transparan
-                    span.style.borderRadius = "0.5rem"; // bulatan/rounded card
-                    span.style.padding = "0.1rem 0.3rem"; // sesuaikan padding
+                    span.style.backgroundColor = `rgba(${wordHighlightBgColor}, 0)`;
 
-                    // Gabungkan "Hi there!" dan sisipkan hand icon
                     if (isFirst && word.toLowerCase() === "hi") {
                         span.textContent = "Hi there! ";
                         const img = document.createElement("img");
@@ -271,18 +367,17 @@
                         img.className = "hand-icon";
                         span.appendChild(img);
                         isFirst = false;
-                    } else if (idx > 1 || !isFirst) {
+                    } else {
                         span.textContent = word;
                     }
 
-                    // jika kata termasuk keyword
                     const normalizedWord = word.toLowerCase().replace(/[.,!?;:"]/g, "");
                     if (keywords.includes(normalizedWord)) {
                         span.classList.add("keyword-wrapper");
                         const keywordSpan = document.createElement("span");
                         keywordSpan.className = "keyword";
                         keywordSpan.textContent = word;
-                        span.innerHTML = ""; // hapus teks sebelumnya
+                        span.innerHTML = "";
                         span.appendChild(keywordSpan);
                     }
 
@@ -292,7 +387,6 @@
             });
 
             const animeTextContainers = document.querySelectorAll(".anime-text-container");
-
             animeTextContainers.forEach((container) => {
                 ScrollTrigger.create({
                     trigger: container,
@@ -309,7 +403,6 @@
 
                         words.forEach((word, index) => {
                             const wordText = word.querySelector("span") || word;
-
                             const wordStart = index / totalWords / lastWordEnd;
                             const wordEnd = (index + overlapWords) / totalWords / lastWordEnd;
                             const duration = wordEnd - wordStart;
@@ -319,15 +412,12 @@
                                     progress >= wordEnd ? 1 :
                                         (progress - wordStart) / duration;
 
-                            // opacity kata
                             word.style.opacity = wordProgress;
 
-                            // background highlight default (bulatan transparan)
                             const backgroundFadeStart = wordProgress >= 0.9 ? (wordProgress - 0.9) / 0.1 : 0;
                             const backgroundOpacity = Math.max(0, 1 - backgroundFadeStart);
                             word.style.backgroundColor = `rgba(${wordHighlightBgColor}, ${backgroundOpacity})`;
 
-                            // teks muncul halus
                             const textRevealThreshold = 0.9;
                             const textRevealProgress =
                                 wordProgress < textRevealThreshold ? wordProgress / textRevealThreshold : 1;
@@ -337,6 +427,38 @@
                     }
                 });
             });
+
+            // ===============================
+            // PAPER CV FOLD ANIMATION
+            // ===============================
+            let totalScroll;
+            if (window.innerWidth <= 480) {
+                totalScroll = 150; // mobile agak panjang
+            } else if (window.innerWidth <= 768) {
+                totalScroll = 180; // tablet
+            } else {
+                totalScroll = 250; // desktop
+            }
+
+            gsap.set(".paper-container", { opacity: 0 });
+            gsap.set(".fold1", { rotationX: -90 });
+            gsap.set(".fold2", { rotationX: -90 });
+            gsap.set(".fold3", { rotationX: -90 });
+
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".paper-section",
+                    start: "top center",   // mulai saat paper masuk tengah layar
+                    end: `+=${totalScroll}`,
+                    scrub: true,
+                }
+            });
+
+            tl.to(".paper-container", { opacity: 1, duration: 0.3 })
+                .to(".fold1", { rotationX: 0, duration: 1 })
+                .to(".fold2", { rotationX: 0, duration: 1 })
+                .to(".fold3", { rotationX: 0, duration: 1 });
+
 
             ScrollTrigger.refresh();
         });
