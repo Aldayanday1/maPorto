@@ -165,59 +165,62 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Set awal: lipatan tertutup rapat
-        gsap.set(".fold1", { rotationX: -90, scaleY: 0.05 });
+        // =========================
+        // Konfigurasi per device
+        // =========================
+        let totalScroll; // total panjang scroll area untuk timeline
+
+        if (window.innerWidth <= 480) {
+            // 📱 Mobile → super cepat banget
+            totalScroll = 80;
+        } else if (window.innerWidth <= 768) {
+            // 📲 Tablet → lebih cepat
+            totalScroll = 105;
+        } else {
+            // 💻 Desktop → tetap normal
+            totalScroll = 220;
+        }
+
+        // Set posisi awal
+        gsap.set(".paper-container", { opacity: 0 });
+        gsap.set(".fold1", { rotationX: -90 });
         gsap.set(".fold2", { rotationX: -90, opacity: 0 });
         gsap.set(".fold3", { rotationX: -90, opacity: 0 });
 
-        // Fold 1 (super cepat)
-        gsap.to(".fold1", {
-            rotationX: 0,
-            scaleY: 1,
+        // Timeline berurutan
+        let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".paper-section",
                 start: "top top",
-                end: "top+=60 top", // sangat singkat
-                scrub: 1
+                end: `top+=${totalScroll} top`, // sesuai device
+                scrub: 1,
             }
         });
 
-        // Fold 2
-        gsap.fromTo(".fold2",
-            { rotationX: -90, opacity: 0 },
-            {
-                rotationX: 0,
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: ".paper-section",
-                    start: "top+=60 top",
-                    end: "top+=120 top", // singkat
-                    scrub: 1,
-                    onUpdate: self => {
-                        gsap.set(".fold2", { opacity: self.progress > 0 ? 1 : 0 });
-                    }
-                }
-            }
-        );
+        // Fade-in container dulu
+        tl.to(".paper-container", { opacity: 1, duration: 0.2 });
 
-        // Fold 3
-        gsap.fromTo(".fold3",
-            { rotationX: -90, opacity: 0 },
-            {
-                rotationX: 0,
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: ".paper-section",
-                    start: "top+=120 top",
-                    end: "top+=180 top", // singkat
-                    scrub: 1,
-                    onUpdate: self => {
-                        gsap.set(".fold3", { opacity: self.progress > 0 ? 1 : 0 });
-                    }
-                }
-            }
-        );
+        // Step 1: buka lipatan pertama
+        tl.to(".fold1", {
+            rotationX: 0,
+            duration: 1
+        });
+
+        // Step 2: buka lipatan kedua
+        tl.to(".fold2", {
+            rotationX: 0,
+            opacity: 1,
+            duration: 1
+        });
+
+        // Step 3: buka lipatan ketiga
+        tl.to(".fold3", {
+            rotationX: 0,
+            opacity: 1,
+            duration: 1
+        });
     </script>
+
 
 </body>
 
