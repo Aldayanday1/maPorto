@@ -572,17 +572,18 @@
 
         // ----------- ANIMATE OUTRO -----------
 
-        let outroY = window.innerWidth < 768 ? -50 : -80;
-        gsap.to(".section--outro-wrapper", {
-            yPercent: outroY,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".section--outro",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
-        });
+        gsap.fromTo(".section--outro-wrapper",
+            { clipPath: "inset(100% 0% 0% 0%)" },
+            {
+                clipPath: "inset(0% 0% 0% 0%)",
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".section--outro",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
 
 
     </script>
