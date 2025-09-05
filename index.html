@@ -279,12 +279,12 @@
 
         .section--outro {
             position: relative;
-            height: calc(200vh + 240vh);
+            height: calc(200vh + 180vh);
             /* spacer agar scroll tetap bisa turun */
         }
 
         .section--outro-wrapper {
-            margin-top: -240vh;
+            margin-top: -180vh;
             position: relative;
             top: 0;
             left: 0;
@@ -572,6 +572,17 @@
 
         // ----------- ANIMATE OUTRO -----------
 
+        gsap.to(".section--outro-wrapper", {
+            yPercent: -80,
+            force3D: true, // paksa pakai GPU
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".section--outro",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
 
     </script>
 
