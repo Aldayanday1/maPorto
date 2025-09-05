@@ -279,15 +279,21 @@
 
         .section--outro {
             position: relative;
-            height: 200vh;
+            height: calc(200vh + 180vh);
+        }
+
+        /* ini jadi container animasi */
+        .outro-anim {
+            position: relative;
+            /* jangan absolute */
+            width: 100%;
+            will-change: transform;
         }
 
         .section--outro-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
+            margin-top: -180vh;
+            position: relative;
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -296,20 +302,8 @@
             background: #0f0e0e;
             color: #fff;
             z-index: 10;
-            will-change: transform, opacity;
-            transform: translateZ(0);
         }
 
-        .section--outro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0f0e0e;
-            z-index: 5;
-        }
 
         .outro-inner {
             margin-top: 5rem;
@@ -499,32 +493,32 @@
         </div>
     </section>
 
-    <!-- Section Outro -->
     <section class="section--outro">
-        <div class="section--outro-wrapper">
-            <h2 class="section__title">Recents Project</h2>
-            <p>See more of my works soon.</p>
+        <div class="outro-anim">
+            <div class="section--outro-wrapper">
+                <h2 class="section__title">Recents Project</h2>
+                <p>See more of my works soon.</p>
 
-            <div class="outro-inner">
-                <div class="outro-wrap">
-                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
-                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
-                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
-                </div>
-                <div class="outro-wrap">
-                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
-                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
-                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
-                </div>
-                <div class="outro-wrap">
-                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
-                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
-                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                <div class="outro-inner">
+                    <div class="outro-wrap">
+                        <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                    </div>
+                    <div class="outro-wrap">
+                        <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                    </div>
+                    <div class="outro-wrap">
+                        <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -570,15 +564,14 @@
 
         // ----------- ANIMATE OUTRO -----------
 
-        gsap.to(".section--outro-wrapper", {
-            y: "-60%",           // lebih kecil dari -80%
-            scale: 0.95,         // efek "angkat"
-            ease: "power2.out",
+        gsap.to(".outro-anim", {
+            y: "-80%",       // balik ke efek awal (geser banyak)
+            ease: "power3.out",
             scrollTrigger: {
                 trigger: ".section--outro",
                 start: "top bottom",
                 end: "bottom top",
-                scrub: 0.6
+                scrub: 0.5   // lebih smooth, ga “kasar” kayak scrub:true
             }
         });
 
