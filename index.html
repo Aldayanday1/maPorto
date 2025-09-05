@@ -279,12 +279,12 @@
 
         .section--outro {
             position: relative;
-            height: calc(200vh + 180vh);
+            height: calc(200vh + 240vh);
             /* spacer agar scroll tetap bisa turun */
         }
 
         .section--outro-wrapper {
-            margin-top: -180vh;
+            margin-top: -240vh;
             position: relative;
             top: 0;
             left: 0;
@@ -571,19 +571,6 @@
         });
 
         // ----------- ANIMATE OUTRO -----------
-
-        gsap.fromTo(".section--outro-wrapper",
-            { clipPath: "inset(100% 0% 0% 0%)" },
-            {
-                clipPath: "inset(0% 0% 0% 0%)",
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".section--outro",
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
 
 
     </script>
