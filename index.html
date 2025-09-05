@@ -279,28 +279,26 @@
 
         .section--outro {
             position: relative;
-            height: calc(200vh + 180vh);
-            /* spacer agar scroll tetap bisa turun */
+            height: 200vh;
         }
 
         .section--outro-wrapper {
-            margin-top: -180vh;
-            position: relative;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             padding: 5vh 0;
             background: #0f0e0e;
-            /* solid, tidak transparan */
             color: #fff;
             z-index: 10;
-            /* supaya menumpuk section sebelumnya */
             will-change: transform, opacity;
         }
+
 
         .section--outro::before {
             content: '';
