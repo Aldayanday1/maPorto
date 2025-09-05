@@ -279,7 +279,7 @@
 
         .section--outro {
             position: relative;
-            height: calc(200vh + 180vh);
+            height: calc(80vh + 10vh);
             z-index: 0;
             /* base layer */
         }
@@ -307,7 +307,6 @@
             /* pastikan konten di atas background */
             /* pastikan di atas ::before */
         }
-
 
         .section--outro::before {
             content: '';
@@ -351,6 +350,39 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* ----------- SECTION NEXT (contoh tambahan) ----------- */
+        .section--next {
+            position: relative;
+            min-height: 100vh;
+            background: #1b1a1a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .section--next-wrapper {
+            max-width: 800px;
+            padding: 4rem 2rem;
+        }
+
+        .section--next .btn-contact {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .section--next .btn-contact:hover {
+            background: #fff;
+            color: #0f0e0e;
         }
     </style>
 </head>
@@ -532,6 +564,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- SECTION BARU -->
+    <section class="section--next">
+        <div class="section--next-wrapper">
+            <h2 class="section__title">Get In Touch</h2>
+            <p>If you’d like to collaborate or just say hi, feel free to contact me.</p>
+            <a href="#" class="btn-contact">Contact Me</a>
         </div>
     </section>
 
