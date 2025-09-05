@@ -572,15 +572,17 @@
         // ----------- ANIMATE OUTRO -----------
 
         gsap.to(".section--outro-wrapper", {
-            y: "-80%", // naik lebih cepat, efek menumpuk lebih tegas
-            ease: "power3.out", // hapus opacity supaya tidak transparan
+            y: "-60%",        // naik ke atas
+            scale: 0.9,       // sedikit mengecil, kesan ditarik ke belakang
+            ease: "power2.out",
             scrollTrigger: {
                 trigger: ".section--outro",
-                start: "top bottom", // mulai saat top outro muncul
+                start: "top bottom",
                 end: "bottom top",
                 scrub: true
             }
         });
+
     </script>
 
     <script>
