@@ -276,18 +276,20 @@
         }
 
         /* ----------- SECTION OUTRO ----------- */
-
         .section--outro {
             position: relative;
             height: calc(200vh + 180vh);
             /* spacer agar scroll tetap bisa turun */
+            will-change: transform;
+            transform: translateZ(0);
+            /* paksa GPU */
         }
 
         .section--outro-wrapper {
             margin-top: -180vh;
-            position: relative;
+            position: sticky;
+            /* ini kunci di mobile biar nggak drop */
             top: 0;
-            left: 0;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -295,18 +297,11 @@
             justify-content: flex-start;
             padding: 5vh 0;
             background: #0f0e0e;
-            /* solid, tidak transparan */
             color: #fff;
             z-index: 10;
-            /* supaya menumpuk section sebelumnya */
             will-change: transform;
-        }
-
-        .column__item img,
-        .outro__item img {
-            will-change: transform, opacity;
-            transform: translateZ(0);
-            /* trik GPU boost */
+            transform: translate3d(0, 0, 0);
+            /* paksa GPU */
         }
 
 
@@ -517,43 +512,23 @@
 
             <div class="outro-inner">
                 <div class="outro-wrap">
-                    <div class="outro__item">
-                        <img src="images/build-1.webp" alt="Project 1" loading="lazy" width="600" height="400">
-                    </div>
-                    <div class="outro__item">
-                        <img src="images/build-2.webp" alt="Project 2" loading="lazy" width="600" height="400">
-                    </div>
-                    <div class="outro__item">
-                        <img src="images/build-3.webp" alt="Project 3" loading="lazy" width="600" height="400">
-                    </div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
                 </div>
                 <div class="outro-wrap">
-                    <div class="outro__item">
-                        <img src="images/build-4.webp" alt="Project 4" loading="lazy" width="600" height="400">
-                    </div>
-                    <div class="outro__item">
-                        <img src="images/build-1.webp" alt="Project 1 repeat" loading="lazy" width="600" height="400">
-                    </div>
-                    <div class="outro__item">
-                        <img src="images/build-2.webp" alt="Project 2 repeat" loading="lazy" width="600" height="400">
-                    </div>
+                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
                 </div>
                 <div class="outro-wrap">
-                    <div class="outro__item">
-                        <img src="images/build-3.webp" alt="Project 3 repeat" loading="lazy" width="600" height="400">
-                    </div>
-                    <div class="outro__item">
-                        <img src="images/build-4.webp" alt="Project 4 repeat" loading="lazy" width="600" height="400">
-                    </div>
-                    <div class="outro__item">
-                        <img src="images/build-1.webp" alt="Project 1 repeat again" loading="lazy" width="600"
-                            height="400">
-                    </div>
+                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
                 </div>
             </div>
         </div>
     </section>
-
 
 
     <!-- GSAP + ScrollTrigger -->
@@ -599,18 +574,19 @@
         });
 
         // ----------- ANIMATE OUTRO -----------
-
         gsap.to(".section--outro-wrapper", {
             yPercent: -80,
-            force3D: true, // paksa pakai GPU
-            ease: "power3.out",
+            ease: "none",   // ganti ke "none" agar pergerakan sinkron dg scroll (lebih smooth di mobile)
+            force3D: true,
             scrollTrigger: {
                 trigger: ".section--outro",
                 start: "top bottom",
                 end: "bottom top",
-                scrub: true
+                scrub: 1, // kasih delay kecil biar smooth
+                anticipatePin: 1 // tambah prediksi scroll agar nggak nge-lag
             }
         });
+
 
     </script>
 
