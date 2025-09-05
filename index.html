@@ -278,76 +278,43 @@
         /* ----------- SECTION OUTRO ----------- */
         .section--outro {
             position: relative;
-            height: calc(200vh + 180vh);
-            /* spacer agar scroll tetap bisa turun */
-            will-change: transform;
-            transform: translateZ(0);
-            /* paksa GPU */
+            min-height: 100vh;
+            /* cukup 1 layar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: #0f0e0e;
+            color: #fff;
+            padding: 5vh 2vw;
         }
 
         .section--outro-wrapper {
-            margin-top: -180vh;
-            position: sticky;
-            /* ini kunci di mobile biar nggak drop */
-            top: 0;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 5vh 0;
-            background: #0f0e0e;
-            color: #fff;
-            z-index: 10;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
-            /* paksa GPU */
+            max-width: 1200px;
+            text-align: center;
         }
 
-
-        .section--outro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0f0e0e;
-            z-index: 5;
-        }
-
-        .outro-inner {
-            margin-top: 5rem;
+        .section--outro .outro-inner {
             display: flex;
-            gap: 2vw;
             flex-wrap: wrap;
-            /* otomatis turun ke bawah */
             justify-content: center;
-            width: 90%;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .outro-wrap {
-            flex: 1 1 20%;
-            /* fleksibel tapi rata */
-            display: flex;
-            flex-direction: column;
-            gap: 2vh;
-            min-width: 200px;
+        .section--outro .outro__item {
+            flex: 1 1 30%;
+            max-width: 300px;
         }
 
-        .outro__item {
+        .section--outro .outro__item img {
             width: 100%;
-            height: 25vh;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #222;
-        }
-
-        .outro__item img {
-            width: 100%;
-            height: 100%;
+            height: auto;
+            border-radius: 8px;
             object-fit: cover;
         }
+
 
         /* ----------- SECTION PORTFOLIO ----------- */
         .section--portfolio {
