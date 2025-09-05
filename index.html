@@ -35,7 +35,7 @@
         }
 
         .section--columns {
-            margin-top: 19vh;
+            margin-top: 25vh;
             position: relative;
             min-height: 100vh;
             padding: 10vh 0;
@@ -86,15 +86,6 @@
             display: block;
         }
 
-
-        .section--outro {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-
         /* ======================= */
         /* RESPONSIVE MOBILE */
         /* ======================= */
@@ -141,20 +132,26 @@
         }
 
         .section--outro {
-            min-height: 100vh;
+            position: relative;
+            height: 200vh;
+            /* spacer agar scroll tetap bisa turun */
+        }
+
+        .section--outro-wrapper {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             padding: 5vh 0;
-            font-size: 1rem;
             background: #0f0e0e;
-            color: #ffffff;
-            margin-top: -230vh;
-            /* numpuk ke atas secukupnya */
-            position: relative;
-            z-index: 2;
-            /* biar di atas porto */
+            /* solid, tidak transparan */
+            color: #fff;
+            z-index: 10;
+            /* supaya menumpuk section sebelumnya */
         }
 
         .outro-inner {
@@ -302,7 +299,7 @@
             }
 
             .anime-text p {
-                font-size: 1rem;
+                font-size: 2rem;
                 line-height: 2.2rem;
                 /* jangan terlalu kecil */
             }
@@ -486,30 +483,29 @@
         </div>
     </section>
 
-
-    <!-- Outro / Halaman Terakhir -->
     <section class="section--outro">
-        <h2 class="section__title">Recents Project</h2>
-        <p>See more of my works soon.</p>
+        <div class="section--outro-wrapper">
+            <h2 class="section__title">Recents Project</h2>
+            <p>See more of my works soon.</p>
 
-        <div class="outro-inner">
-            <div class="outro-wrap">
-                <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
-                <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
-                <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
-            </div>
-            <div class="outro-wrap">
-                <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
-                <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
-                <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
-            </div>
-            <div class="outro-wrap">
-                <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
-                <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
-                <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+            <div class="outro-inner">
+                <div class="outro-wrap">
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                </div>
+                <div class="outro-wrap">
+                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                </div>
+                <div class="outro-wrap">
+                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                </div>
             </div>
         </div>
-
     </section>
 
 
@@ -554,20 +550,16 @@
             });
         });
 
-        gsap.fromTo(".section--outro",
-            { y: 150, opacity: 0 },
-            {
-                y: 0, opacity: 1, ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".section--outro",
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 20  // 0.5 detik smoothing
-                }
+        gsap.to(".section--outro-wrapper", {
+            y: "-80%", // naik lebih cepat, efek menumpuk lebih tegas
+            ease: "power3.out", // hapus opacity supaya tidak transparan
+            scrollTrigger: {
+                trigger: ".section--outro",
+                start: "top bottom", // mulai saat top outro muncul
+                end: "bottom top",
+                scrub: true
             }
-        );
-
-
+        });
     </script>
 
     <script>
@@ -646,7 +638,7 @@
                 ScrollTrigger.create({
                     trigger: container,
                     pin: true,
-                    start: "top 18%",
+                    start: "top 23%",
                     end: "+=100%",
                     scrub: true,
                     onUpdate: (self) => {
