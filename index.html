@@ -625,7 +625,32 @@
 
         // ----------- ANIMATE OUTRO -----------
 
-       
+        // GSAP MatchMedia khusus mobile vs desktop
+        let mm = gsap.matchMedia();
+
+        // Desktop > 480px
+        mm.add("(min-width: 481px)", () => {
+            gsap.to(".outro-anim", {
+                y: "-80%",
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".section--outro",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.5
+                }
+            });
+        });
+
+        // Mobile ≤ 480px
+        mm.add("(max-width: 480px)", () => {
+            const outroWrapper = document.querySelector(".section--outro-wrapper");
+            if (outroWrapper) {
+                outroWrapper.style.marginTop = "0"; // reset margin
+                outroWrapper.style.transform = "translateY(-270vh)"; // naik separuh viewport
+            }
+        });
+
     </script>
 
     <script>
