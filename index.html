@@ -299,6 +299,7 @@
             color: #fff;
             z-index: 10;
             /* supaya menumpuk section sebelumnya */
+            will-change: transform;
         }
 
         .section--outro::before {
@@ -572,9 +573,9 @@
         // ----------- ANIMATE OUTRO -----------
 
         gsap.to(".section--outro-wrapper", {
-            y: "-80%",
-            opacity: 0.5,   // sambil memudar
-            ease: "power1.out",
+            yPercent: -80,
+            force3D: true, // paksa pakai GPU
+            ease: "power3.out",
             scrollTrigger: {
                 trigger: ".section--outro",
                 start: "top bottom",
