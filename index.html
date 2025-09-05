@@ -284,6 +284,11 @@
             /* base layer */
         }
 
+        .section__title {
+            font-family: "DM Sans", sans-serif;
+            font-weight: 500;
+        }
+
         /* ini jadi container animasi */
         .outro-anim {
             position: relative;
@@ -620,18 +625,7 @@
 
         // ----------- ANIMATE OUTRO -----------
 
-        gsap.to(".outro-anim", {
-            y: "-80%",       // balik ke efek awal (geser banyak)
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".section--outro",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.5   // lebih smooth, ga “kasar” kayak scrub:true
-            }
-        });
-
-
+       
     </script>
 
     <script>
@@ -707,7 +701,7 @@
 
             animeTextContainers.forEach((container) => {
                 // tentukan start value default
-                let startValue = "top 23%";
+                let startValue = "top 24%";
 
                 // cek jika layar kecil (misal <= 480px)
                 if (window.innerWidth <= 480) {
