@@ -572,9 +572,9 @@
 
         // ----------- ANIMATE OUTRO -----------
 
+        let outroY = window.innerWidth < 768 ? -50 : -80;
         gsap.to(".section--outro-wrapper", {
-            yPercent: -80,
-            force3D: true, // paksa pakai GPU
+            yPercent: outroY,
             ease: "power3.out",
             scrollTrigger: {
                 trigger: ".section--outro",
@@ -583,6 +583,7 @@
                 scrub: true
             }
         });
+
 
     </script>
 
