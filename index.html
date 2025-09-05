@@ -302,6 +302,14 @@
             will-change: transform;
         }
 
+        .column__item img,
+        .outro__item img {
+            will-change: transform, opacity;
+            transform: translateZ(0);
+            /* trik GPU boost */
+        }
+
+
         .section--outro::before {
             content: '';
             position: absolute;
@@ -509,9 +517,20 @@
 
             <div class="outro-inner">
                 <div class="outro-wrap">
-                    <div>CAPE BANGED</div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
                 </div>
-
+                <div class="outro-wrap">
+                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                </div>
+                <div class="outro-wrap">
+                    <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                    <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                </div>
             </div>
         </div>
     </section>
