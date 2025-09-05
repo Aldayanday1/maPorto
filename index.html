@@ -16,14 +16,7 @@
             overflow-x: hidden;
         }
 
-        .section__title {
-            font-weight: 300;
-            font-size: clamp(2rem, 17vw, 12.5rem);
-            margin: 5vh 0 6vh;
-            line-height: 0.9;
-            text-transform: none;
-            text-align: center;
-        }
+        /* ----------- SECTION INTRO ----------- */
 
         .section--intro {
             background: #0f0e0e;
@@ -34,162 +27,16 @@
             justify-content: center;
         }
 
-        .section--columns {
-            margin-top: 25vh;
-            position: relative;
-            min-height: 100vh;
-            padding: 10vh 0;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
+        .section__title {
+            font-weight: 300;
+            font-size: clamp(2rem, 17vw, 12.5rem);
+            margin: 5vh 0 6vh;
+            line-height: 0.9;
+            text-transform: none;
+            text-align: center;
         }
 
-        .columns-inner {
-            margin-top: -55rem;
-            margin-bottom: 10%;
-            display: flex;
-            gap: 1vw;
-            /* jarak antar kolom lebih rapat */
-            width: 200vw;
-            /* lebarkan container biar muat banyak kolom */
-            transform: rotate(-45deg);
-            transform-origin: center center;
-        }
-
-        .column-wrap {
-            flex: none;
-            /* jangan stretch otomatis */
-            width: 20vw;
-            /* setiap kolom lebih kecil */
-            display: flex;
-            flex-direction: column;
-            gap: 1vw;
-        }
-
-        /* optimasi performance */
-        .column__item {
-            width: 100%;
-            height: 30vh;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transform: scale(0.9);
-            opacity: 0;
-            will-change: transform, opacity;
-        }
-
-        .column__item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* ======================= */
-        /* RESPONSIVE MOBILE */
-        /* ======================= */
-        @media (max-width: 768px) {
-            .columns-inner {
-                width: 140vw;
-                /* kasih lebar ekstra biar muat rotasi */
-                gap: 5vw;
-                /* jarak antar kolom */
-            }
-
-            .column-wrap {
-                flex: none;
-                width: 45vw;
-                /* biar cuma 2 kolom pas mobile */
-                gap: 5vw;
-                /* JARAK VERTIKAL antar card ditambah */
-            }
-
-            .column__item {
-                aspect-ratio: 1/1;
-                /* jadi kotak persegi */
-                height: auto;
-                /* override tinggi default */
-            }
-
-            .section--columns {
-                min-height: 250vh;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .columns-inner {
-                width: 160vw;
-                /* makin lebar di hp kecil */
-            }
-
-            .column-wrap {
-                width: 60vw;
-                /* biar 2 kolom saja di hp kecil */
-                gap: 5vw;
-                /* jarak vertikal lebih lega di hp kecil */
-            }
-        }
-
-        .section--outro {
-            position: relative;
-            height: 500vh;
-            /* spacer agar scroll tetap bisa turun */
-        }
-
-        .section--outro-wrapper {
-            margin-top: -180vh;
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 5vh 0;
-            background: #0f0e0e;
-            /* solid, tidak transparan */
-            color: #fff;
-            z-index: 10;
-            /* supaya menumpuk section sebelumnya */
-        }
-
-        .outro-inner {
-            margin-top: 5rem;
-            display: flex;
-            gap: 2vw;
-            flex-wrap: wrap;
-            /* otomatis turun ke bawah */
-            justify-content: center;
-            width: 90%;
-        }
-
-        .outro-wrap {
-            flex: 1 1 20%;
-            /* fleksibel tapi rata */
-            display: flex;
-            flex-direction: column;
-            gap: 2vh;
-            min-width: 200px;
-        }
-
-        .outro__item {
-            width: 100%;
-            height: 25vh;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #222;
-        }
-
-        .outro__item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-
-
+        /* ----------- SECTION ABOUTME ----------- */
 
         .copy-container {
             width: 100%;
@@ -328,17 +175,186 @@
                 /* lebih tinggi */
             }
         }
+
+        /* ----------- SECTION CARD PORTO ----------- */
+
+        .section--columns {
+            margin-top: 25vh;
+            position: relative;
+            min-height: 100vh;
+            padding: 10vh 0;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .columns-inner {
+            margin-top: -55rem;
+            margin-bottom: 10%;
+            display: flex;
+            gap: 1vw;
+            /* jarak antar kolom lebih rapat */
+            width: 200vw;
+            /* lebarkan container biar muat banyak kolom */
+            transform: rotate(-45deg);
+            transform-origin: center center;
+        }
+
+        .column-wrap {
+            flex: none;
+            /* jangan stretch otomatis */
+            width: 20vw;
+            /* setiap kolom lebih kecil */
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+        }
+
+        /* optimasi performance */
+        .column__item {
+            width: 100%;
+            height: 30vh;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transform: scale(0.9);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .column__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ======================= */
+        /* RESPONSIVE MOBILE */
+        /* ======================= */
+        @media (max-width: 768px) {
+            .columns-inner {
+                width: 140vw;
+                /* kasih lebar ekstra biar muat rotasi */
+                gap: 5vw;
+                /* jarak antar kolom */
+            }
+
+            .column-wrap {
+                flex: none;
+                width: 45vw;
+                /* biar cuma 2 kolom pas mobile */
+                gap: 5vw;
+                /* JARAK VERTIKAL antar card ditambah */
+            }
+
+            .column__item {
+                aspect-ratio: 1/1;
+                /* jadi kotak persegi */
+                height: auto;
+                /* override tinggi default */
+            }
+
+            .section--columns {
+                min-height: 250vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .columns-inner {
+                width: 160vw;
+                /* makin lebar di hp kecil */
+            }
+
+            .column-wrap {
+                width: 60vw;
+                /* biar 2 kolom saja di hp kecil */
+                gap: 5vw;
+                /* jarak vertikal lebih lega di hp kecil */
+            }
+        }
+
+        /* ----------- SECTION OUTRO ----------- */
+
+        .section--outro {
+            position: relative;
+            height: calc(200vh + 180vh);
+            /* spacer agar scroll tetap bisa turun */
+        }
+
+        .section--outro-wrapper {
+            margin-top: -180vh;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5vh 0;
+            background: #0f0e0e;
+            /* solid, tidak transparan */
+            color: #fff;
+            z-index: 10;
+            /* supaya menumpuk section sebelumnya */
+        }
+
+        .section--outro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0e0e;
+            z-index: 5;
+        }
+
+        .outro-inner {
+            margin-top: 5rem;
+            display: flex;
+            gap: 2vw;
+            flex-wrap: wrap;
+            /* otomatis turun ke bawah */
+            justify-content: center;
+            width: 90%;
+        }
+
+        .outro-wrap {
+            flex: 1 1 20%;
+            /* fleksibel tapi rata */
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            min-width: 200px;
+        }
+
+        .outro__item {
+            width: 100%;
+            height: 25vh;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .outro__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 
 <body>
-    <!-- Intro -->
+    <!-- Section Intro -->
     <section class="section--intro">
         <h2 class="section__title">Hi<br>Welcome</h2>
         <p>Since 2k21 - 2k24</p>
     </section>
 
-    <!-- ABOUT ME ANIMATION TEXT -->
+    <!-- Section Aboutme -->
     <section class="about anime-text-container">
         <div class="copy-container">
             <div class="anime-text">
@@ -357,7 +373,7 @@
         </div>
     </section>
 
-    <!-- Card Porto -->
+    <!-- Section Card Porto -->
     <section class="section--columns">
         <div class="columns-inner">
             <div class="column-wrap">
@@ -484,6 +500,7 @@
         </div>
     </section>
 
+    <!-- Section Outro -->
     <section class="section--outro">
         <div class="section--outro-wrapper">
             <h2 class="section__title">Recents Project</h2>
@@ -517,6 +534,8 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
+        // ----------- ANIMATE CARD PORTO -----------
+
         ScrollTrigger.batch(".column__item", {
             start: "top bottom",
             onEnter: (batch) => {
@@ -537,7 +556,6 @@
             }
         });
 
-        // gerakan kolom biar dinamis
         gsap.utils.toArray(".column-wrap").forEach((col, i) => {
             gsap.to(col, {
                 yPercent: i % 2 === 0 ? -15 : 15,
@@ -551,20 +569,25 @@
             });
         });
 
+        // ----------- ANIMATE OUTRO -----------
+
         gsap.to(".section--outro-wrapper", {
-            y: "-80%", // naik lebih cepat, efek menumpuk lebih tegas
-            ease: "power3.out", // hapus opacity supaya tidak transparan
+            y: "-75%",
+            ease: "elastic.out(1, 0.3)", // efek mantul halus
             scrollTrigger: {
                 trigger: ".section--outro",
-                start: "top bottom", // mulai saat top outro muncul
+                start: "top bottom",
                 end: "bottom top",
                 scrub: true
             }
         });
+
     </script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // ----------- ANIMATE ABOUTME -----------
 
         document.addEventListener("DOMContentLoaded", () => {
             // Smooth scroll pakai Lenis
@@ -585,9 +608,6 @@
                 "fullstack",
                 "web",
                 "mobile",
-                "laravel",
-                "flutter",
-                "spring"
             ];
 
             animeTextParagraphs.forEach((paragraph) => {
