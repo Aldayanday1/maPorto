@@ -182,7 +182,7 @@
             margin-top: 25vh;
             position: relative;
             min-height: 100vh;
-            padding: 10vh 0;
+            padding: 30vh 0;
             width: 100vw;
             overflow: hidden;
             display: flex;
@@ -706,10 +706,18 @@
             const animeTextContainers = document.querySelectorAll(".anime-text-container");
 
             animeTextContainers.forEach((container) => {
+                // tentukan start value default
+                let startValue = "top 23%";
+
+                // cek jika layar kecil (misal <= 480px)
+                if (window.innerWidth <= 480) {
+                    startValue = "top 17%"; // contoh, lebih rendah untuk mobile
+                }
+
                 ScrollTrigger.create({
                     trigger: container,
                     pin: true,
-                    start: "top 23%",
+                    start: startValue,
                     end: "+=100%",
                     scrub: true,
                     onUpdate: (self) => {
@@ -749,6 +757,7 @@
                     }
                 });
             });
+
 
             ScrollTrigger.refresh();
         });

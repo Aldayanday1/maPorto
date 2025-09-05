@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
+
+        .section--marquee {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 2rem 0;
+            font-family: "DM Sans",
+                sans-serif;
+            font-size: 2rem;
+        }
+
+        .marquee-wrapper {
+            display: flex;
+            width: 100%;
+            font-family: "DM Sans", sans-serif;
+            font-size: 5rem;
+        }
+
+        .marquee {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .marquee-item {
+            padding: 0.5rem 1.5rem;
+            /* background putih */
+            color: black;
+            border-radius: 30px;
+            white-space: nowrap;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .marquee-dot {
+            width: 10px;
+            height: 10px;
+            background: #414141;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section--marquee">
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <div class="marquee-item">
+                    Project A Completed
+                </div>
+                <div class="marquee-dot"></div>
+
+                <div class="marquee-item">
+                    Project B Launched
+                </div>
+                <div class="marquee-dot"></div>
+
+                <div class="marquee-item">
+                    Collaboration Started
+                </div>
+                <div class="marquee-dot"></div>
+
+                <div class="marquee-item">
+                    New Feature Released
+                </div>
+                <div class="marquee-dot"></div>
+
+                <!-- ulang agar loop smooth -->
+                <div class="marquee-item">
+                    Project A Completed
+                </div>
+                <div class="marquee-dot"></div>
+
+                <div class="marquee-item">
+                    Project B Launched
+                </div>
+                <div class="marquee-dot"></div>
+
+                <div class="marquee-item">
+                    Collaboration Started
+                </div>
+                <div class="marquee-dot"></div>
+
+                <div class="marquee-item">
+                    New Feature Released
+                </div>
+                <div class="marquee-dot"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Marquee horizontal loop
+        gsap.to(".marquee", {
+            xPercent: -50, // geser setengah panjang (karena item diulang)
+            ease: "linear",
+            duration: 20,  // kecepatan scroll
+            repeat: -1     // loop terus
+        });
+
+
+    </script>
+
+</body>
+
+</html>
