@@ -348,6 +348,49 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* ----------- SECTION PORTFOLIO ----------- */
+        .section--portfolio {
+            background: #141414;
+            color: #fff;
+            padding: 10vh 5vw;
+            text-align: center;
+        }
+
+        .section--portfolio .section__title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .section--portfolio .section__subtitle {
+            font-size: 1.2rem;
+            color: #bbb;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: #1f1f1f;
+            border-radius: 12px;
+            padding: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
     </style>
 </head>
 
@@ -530,6 +573,32 @@
         </div>
     </section>
 
+    <!-- Section Portfolio -->
+    <section class="section--portfolio">
+        <div class="portfolio-wrapper">
+            <h2 class="section__title">More Works</h2>
+            <p class="section__subtitle">Some highlighted projects I’ve worked on recently</p>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="images/porto-1.jpg" alt="Portfolio 1">
+                    <h3>Landing Page Design</h3>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/porto-2.jpg" alt="Portfolio 2">
+                    <h3>Mobile App UI</h3>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/porto-3.jpg" alt="Portfolio 3">
+                    <h3>Dashboard System</h3>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/porto-4.jpg" alt="Portfolio 4">
+                    <h3>E-commerce Platform</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -574,19 +643,18 @@
         });
 
         // ----------- ANIMATE OUTRO -----------
+
         gsap.to(".section--outro-wrapper", {
             yPercent: -80,
-            ease: "none",   // ganti ke "none" agar pergerakan sinkron dg scroll (lebih smooth di mobile)
-            force3D: true,
+            force3D: true, // paksa pakai GPU
+            ease: "power3.out",
             scrollTrigger: {
                 trigger: ".section--outro",
                 start: "top bottom",
                 end: "bottom top",
-                scrub: 1, // kasih delay kecil biar smooth
-                anticipatePin: 1 // tambah prediksi scroll agar nggak nge-lag
+                scrub: true
             }
         });
-
 
     </script>
 
