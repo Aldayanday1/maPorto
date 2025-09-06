@@ -11,7 +11,8 @@
         body {
             margin: 0;
             font-family: sans-serif;
-            background: #0f0e0e;
+            /*background: #0f0e0e;*/
+            background: #171715;
             color: #fff;
             overflow-x: hidden;
         }
@@ -64,7 +65,7 @@
         }
 
         .anime-text p {
-            color: #fff;
+            color: #99948c;
             text-align: center;
             margin-bottom: 2rem;
             font-size: 3.5rem;
@@ -279,7 +280,7 @@
 
         .section--outro {
             position: relative;
-            height: calc(80vh + 10vh);
+            height: 120vh;
             z-index: 0;
             /* base layer */
         }
@@ -298,7 +299,7 @@
         }
 
         .section--outro-wrapper {
-            margin-top: -180vh;
+            margin-top: -210vh;
             position: relative;
             width: 100%;
             display: flex;
@@ -389,14 +390,65 @@
             background: #fff;
             color: #0f0e0e;
         }
+
+
+
+
+        .container {
+            overflow: hidden;
+            cursor: ns-resize;
+            white-space: nowrap;
+            padding: 15vh 0;
+            margin: 55vh 0;
+            /* biar ada jarak atas–bawah saja */
+            width: 100%;
+            /* full lebar */
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-family: "Playfair Display", serif;
+            font-size: 10vw;
+            position: relative;
+            color: #99948c;
+            display: inline-block;
+            margin: 5vh;
+            padding: 0 0%;
+            will-change: transform;
+        }
+
+        /* versi mobile max-width 480px */
+        @media (max-width: 480px) {
+            .container {
+                position: relative;
+                /* biar ikut flow normal */
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 15vh 5vw;
+                margin: 0;
+                text-align: left;
+                /* rata kiri */
+            }
+
+            .title {
+                font-size: 15vw;
+                /* dibesarkan */
+                margin: 0;
+                line-height: 1.2;
+                white-space: normal;
+                /* biar bisa 2 baris */
+                word-break: break-word;
+                /* pecah kata kalau panjang */
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Section Intro -->
-    <section class="section--intro">
-        <h2 class="section__title">Hi<br>Welcome</h2>
-        <p>Since 2k21 - 2k24</p>
+    <section class="container">
+        <p class="title">Fullstack Developer *</p>
     </section>
 
     <!-- Section Aboutme -->
@@ -780,6 +832,67 @@
 
             ScrollTrigger.refresh();
         });
+    </script>
+
+    <script>
+        const el = document.querySelector(".title");
+        let elWidth = el.offsetWidth;
+        let windowWidth = window.innerWidth;
+
+        let scrollY = window.scrollY;
+        let prevScrollY = scrollY;
+
+        let skewTarget = 0;
+        let translateTarget = 0;
+
+        let skewWithEasing = 0;
+        let translateWithEasing = 0;
+
+        let skewEasingFactor = 0.05;       // lebih lambat untuk skew
+        let translateEasingFactor = 0.02;  // lebih lambat untuk translate
+
+        window.addEventListener("resize", handleWithResize);
+        window.addEventListener("scroll", handleScroll);
+
+        function handleScroll() {
+            scrollY = window.scrollY;
+        }
+
+        function handleWithResize() {
+            elWidth = el.offsetWidth;
+            windowWidth = window.innerWidth;
+        }
+
+        function lerp(start, end, factor) {
+            return (1 - factor) * start + factor * end;
+        }
+
+        function animateMe() {
+            // arah scroll = perbedaan scrollY
+            skewTarget = (scrollY - prevScrollY) * 5; // faktor ×2
+            prevScrollY = scrollY;
+
+            // semakin scroll ke bawah → teks geser kiri
+            translateTarget = -scrollY * 0.5; // 0.5 = speed
+
+            skewWithEasing = lerp(skewWithEasing, skewTarget, skewEasingFactor);
+            skewWithEasing = Math.min(Math.max(parseInt(skewWithEasing), -75), 75);
+
+            translateWithEasing = lerp(
+                translateWithEasing,
+                translateTarget,
+                translateEasingFactor
+            );
+
+            el.style.transform = `
+        translateX(${translateWithEasing}px)
+        skew(${skewWithEasing}deg)
+      `;
+
+            window.requestAnimationFrame(animateMe);
+        }
+
+        animateMe();
     </script>
 </body>
 

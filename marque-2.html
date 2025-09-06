@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Marquee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 300vh;
+            background: #171715;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .container {
+            overflow: hidden;
+            cursor: ns-resize;
+            white-space: nowrap;
+            padding: 15vh 0;
+            margin: 55vh 0;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .title {
+            font-family: "Playfair Display", serif;
+            font-size: 10vw;
+            color: #99948c;
+            display: inline-block;
+            margin: 5vh;
+            will-change: transform;
+        }
+
+        /* versi mobile max-width 480px */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10vh 0;
+                margin: 30vh 0;
+            }
+
+            .title {
+                font-size: 14vw;
+                /* lebih besar relatif, biar tetap dominan */
+                margin: 3vh 0;
+                line-height: 1.1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container">
+        <p class="title">Fullstack Developer *</p>
+    </section>
+
+    <script>
+        const el = document.querySelector(".title");
+        let elWidth = el.offsetWidth;
+        let windowWidth = window.innerWidth;
+
+        let scrollY = window.scrollY;
+        let prevScrollY = scrollY;
+
+        let skewTarget = 0;
+        let translateTarget = 0;
+
+        let skewWithEasing = 0;
+        let translateWithEasing = 0;
+
+        let skewEasingFactor = 0.05;
+        let translateEasingFactor = 0.02;
+
+        window.addEventListener("resize", handleWithResize);
+        window.addEventListener("scroll", handleScroll);
+
+        function handleScroll() {
+            scrollY = window.scrollY;
+        }
+
+        function handleWithResize() {
+            elWidth = el.offsetWidth;
+            windowWidth = window.innerWidth;
+        }
+
+        function lerp(start, end, factor) {
+            return (1 - factor) * start + factor * end;
+        }
+
+        function animateMe() {
+            skewTarget = (scrollY - prevScrollY) * 5;
+            prevScrollY = scrollY;
+
+            translateTarget = -scrollY * 0.5;
+
+            skewWithEasing = lerp(skewWithEasing, skewTarget, skewEasingFactor);
+            skewWithEasing = Math.min(Math.max(parseInt(skewWithEasing), -75), 75);
+
+            translateWithEasing = lerp(
+                translateWithEasing,
+                translateTarget,
+                translateEasingFactor
+            );
+
+            el.style.transform = `
+                translateX(${translateWithEasing}px)
+                skew(${skewWithEasing}deg)
+            `;
+
+            window.requestAnimationFrame(animateMe);
+        }
+
+        animateMe();
+    </script>
+</body>
+
+</html>
