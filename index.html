@@ -17,6 +17,7 @@
             background-color: #2e2e2e;
             color: #fff;
             overflow-x: hidden;
+            font-family: "DM Sans", sans-serif;
         }
 
         /* ----------- SECTION INTRO ----------- */
@@ -583,6 +584,33 @@
             font-family: "DM Sans", sans-serif;
         }
 
+        .btn-download {
+            background-color: #444;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            /* ⬅️ hilangin underline */
+            display: inline-block;
+            /* biar proper tombol */
+        }
+
+        .btn-download i {
+            margin-right: 10px;
+            /* kasih jarak 8px ke kanan dari icon */
+        }
+
+        .btn-download:hover {
+            background-color: #666;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            /* pastikan hover juga tanpa underline */
+        }
+
+
         /* ======================= */
         /* RESPONSIVE MOBILE */
         /* ======================= */
@@ -690,7 +718,9 @@
             <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
         </div>
         <div class="content">
-            <p>Curriculum Vitae</p>
+            <a href="files/CV_MochamadAldi.pdf" download class="btn-download">
+                <i class="fa-solid fa-arrow-down"></i> Download CV
+            </a>
         </div>
     </section>
 
