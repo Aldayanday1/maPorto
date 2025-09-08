@@ -108,11 +108,11 @@
         }
 
         /* ===== SECTION INTRO MOBILE ===== */
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
             .intro-section {
                 height: auto;
                 /* biar bisa scroll jika tinggi konten lebih */
-                padding: 200px 20px;
+                padding: 150px 20px;
             }
 
             /* Foto Profil lebih kecil */
@@ -294,7 +294,7 @@
             }
 
             .hand-icon {
-                width: 2.5rem;
+                width: 2.5rem !important;
                 /* sedikit lebih kecil */
                 top: -0.3rem;
             }
@@ -941,7 +941,7 @@
 
                 // cek jika layar kecil (misal <= 480px)
                 if (window.innerWidth <= 480) {
-                    startValue = "top 7%"; // contoh, lebih rendah untuk mobile
+                    startValue = "top 4%"; // contoh, lebih rendah untuk mobile
                 }
 
                 ScrollTrigger.create({
