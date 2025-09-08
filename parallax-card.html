@@ -384,26 +384,38 @@
             const slider = document.querySelector(".slider");
 
             slider.addEventListener("wheel", e => {
-                if (Math.abs(e.deltaX) > 0) {
+                // hanya tangkap scroll horizontal
+                if (Math.abs(e.deltaX) > 0 || (Math.abs(e.deltaY) > 0 && e.shiftKey)) {
                     e.preventDefault();
-                    state.targetX += -e.deltaX * config.scrollSpeed;
+                    state.targetX += - (e.deltaX || e.deltaY) * config.scrollSpeed;
                 }
+                // jika scroll vertikal tanpa shift, biarkan default (page scroll)
             }, { passive: false });
 
+            // touch events untuk mobile
             slider.addEventListener("touchstart", e => {
                 state.isDragging = true;
                 state.startX = e.touches[0].clientX;
+                state.startY = e.touches[0].clientY;
                 state.lastX = state.targetX;
+                state.lastY = 0;
             });
 
             slider.addEventListener("touchmove", e => {
                 if (!state.isDragging) return;
-                const delta = e.touches[0].clientX - state.startX;
-                state.targetX = state.lastX + delta;
+                const deltaX = e.touches[0].clientX - state.startX;
+                const deltaY = e.touches[0].clientY - state.startY;
+
+                // jika horizontal lebih dominan dari vertical, lakukan geser slider
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    e.preventDefault(); // hanya cegah horizontal
+                    state.targetX = state.lastX + deltaX;
+                }
             });
 
             slider.addEventListener("touchend", () => state.isDragging = false);
 
+            // mouse drag untuk desktop
             slider.addEventListener("mousedown", e => {
                 state.isDragging = true;
                 state.startX = e.clientX;
@@ -431,6 +443,7 @@
                 });
             });
         }
+
 
         // ==== INIT SLIDER ====
         function initializeSlider() {
