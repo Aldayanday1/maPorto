@@ -4,32 +4,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax</title>
+    <title>Scroll Panels Effect</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
         @import url("https://fonts.googleapis.com/css?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
         body {
-            height: 200vh;
-            font-family: "DM Mono", monospace;
+            margin: 0;
+            font-family: sans-serif;
+            /*background: #0f0e0e;*/
             background-color: #2e2e2e;
             color: #fff;
+            overflow-x: hidden;
         }
 
-        /* ===== Wrapper Section ===== */
-        .projects-section {
-            margin-top: 25vh;
+        /* ----------- SECTION INTRO ----------- */
+
+        .container {
+            min-height: 100vh;
+            background-color: darkgray;
+        }
+
+        /* ----------- SECTION ABOUTME ----------- */
+
+        .copy-container {
             width: 100%;
-            padding: 40px 20px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .copy-container h1 {
+            width: 70%;
+            color: #141414;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+
+        .anime-text {
+            font-family: "DM Mono",
+                monospace;
+            width: 60%;
+            background-color: transparent;
+            /* atau #1a1a1a kalau mau menutupi */
+        }
+
+        .anime-text p {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .anime-text .word {
+            display: inline-block;
+            position: relative;
+            margin-right: 0.2rem;
+            margin-bottom: 0.2rem;
+            padding: 0.1rem 0.2rem;
+            border-radius: 10rem;
+            will-change: background-color, opacity;
+        }
+
+        .anime-text .word.keyword-wrapper {
+            margin: 0 0.4rem 0.2rem 0.2rem;
+        }
+
+        .anime-text .word span {
+            position: relative;
+        }
+
+        .anime-text .word span.keyword {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border-radius: 2rem;
+            padding: 0.1rem 0;
+            color: #141414;
+        }
+
+        .anime-text .word span.keyword::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% + 1rem);
+            height: calc(100% + 0.4rem);
+            background-color: #fff;
+            border-radius: 2rem;
+            z-index: -1;
+        }
+
+        .anime-text .word,
+        .anime-text .word span {
+            opacity: 0;
+        }
+
+        .hand-icon {
+            width: 3rem;
+            height: auto;
+            vertical-align: middle;
+            margin-left: 0.3rem;
+            position: relative;
+            top: -0.4rem;
+        }
+
+        @media (max-width: 1000px) {
+            .copy-container {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .copy-container h1 {
+                width: 90%;
+                font-size: 2.5rem;
+                /* sedikit lebih besar */
+            }
+
+            .anime-text {
+                width: 90%;
+            }
+
+            .anime-text p {
+                font-size: 2rem;
+                line-height: 2.2rem;
+                /* jangan terlalu kecil */
+            }
+
+            .anime-text .word {
+                margin-right: -0.15rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .hand-icon {
+                width: 2.5rem;
+                /* sedikit lebih kecil */
+                top: -0.3rem;
+            }
+
+            .anime-text .word.keyword-wrapper {
+                margin: 0 0.2rem 0.4rem;
+                /* margin kanan dan bawah lebih besar */
+            }
+
+            .anime-text .word span.keyword::before {
+                width: calc(100% + 1rem);
+                /* lebih lebar */
+                height: calc(100% + 0.1rem);
+                /* lebih tinggi */
+            }
+        }
+
+        /* ----------- SECTION CARD PORTO ----------- */
+
+        .section--columns {
+            margin-top: 25vh;
+            position: relative;
+            min-height: 100vh;
+            padding: 30vh 0;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .columns-inner {
+            margin-top: -55rem;
+            margin-bottom: 10%;
+            display: flex;
+            gap: 1vw;
+            /* jarak antar kolom lebih rapat */
+            width: 200vw;
+            /* lebarkan container biar muat banyak kolom */
+            transform: rotate(-45deg);
+            transform-origin: center center;
+        }
+
+        .column-wrap {
+            flex: none;
+            /* jangan stretch otomatis */
+            width: 20vw;
+            /* setiap kolom lebih kecil */
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+        }
+
+        /* optimasi performance */
+        .column__item {
+            width: 100%;
+            height: 30vh;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transform: scale(0.9);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .column__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ======================= */
+        /* RESPONSIVE MOBILE */
+        /* ======================= */
+        @media (max-width: 768px) {
+            .columns-inner {
+                width: 140vw;
+                /* kasih lebar ekstra biar muat rotasi */
+                gap: 5vw;
+                /* jarak antar kolom */
+            }
+
+            .column-wrap {
+                flex: none;
+                width: 45vw;
+                /* biar cuma 2 kolom pas mobile */
+                gap: 5vw;
+                /* JARAK VERTIKAL antar card ditambah */
+            }
+
+            .column__item {
+                aspect-ratio: 1/1;
+                /* jadi kotak persegi */
+                height: auto;
+                /* override tinggi default */
+            }
+
+            .section--columns {
+                min-height: 250vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .columns-inner {
+                width: 160vw;
+                /* makin lebar di hp kecil */
+            }
+
+            .column-wrap {
+                width: 60vw;
+                /* biar 2 kolom saja di hp kecil */
+                gap: 5vw;
+                /* jarak vertikal lebih lega di hp kecil */
+            }
+        }
+
+        /* ----------- SECTION OUTRO ----------- */
+
+        .section--outro {
+            position: relative;
+            height: 120vh;
+            z-index: 0;
+            /* base layer */
+        }
+
+        .section__title {
+            font-family: "DM Sans", sans-serif;
+            font-weight: 500;
+        }
+
+        /* ini jadi container animasi */
+        .outro-anim {
+            position: relative;
+            /* jangan absolute */
+            width: 100%;
+            will-change: transform;
+        }
+
+        .section--outro-wrapper {
+            margin-top: -210vh;
+            position: relative;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            justify-content: flex-start;
+            padding: 5vh 0;
+            background: #0f0e0e;
+            color: #fff;
+            z-index: 1;
+            /* pastikan konten di atas background */
+            /* pastikan di atas ::before */
+        }
+
+        .section--outro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0e0e;
+            z-index: -1;
+        }
+
+        .outro-inner {
+            margin-top: 5rem;
+            display: flex;
+            gap: 2vw;
+            flex-wrap: wrap;
+            /* otomatis turun ke bawah */
+            justify-content: center;
+            width: 90%;
+        }
+
+        .outro-wrap {
+            flex: 1 1 20%;
+            /* fleksibel tapi rata */
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            min-width: 200px;
+        }
+
+        .outro__item {
+            width: 100%;
+            height: 25vh;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .outro__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ----------- SECTION NEXT (contoh tambahan) ----------- */
+        .section--next {
+            position: relative;
+            min-height: 100vh;
+            background: #1b1a1a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .section--next-wrapper {
+            max-width: 800px;
+            padding: 4rem 2rem;
+        }
+
+        .section--next .btn-contact {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .section--next .btn-contact:hover {
+            background: #fff;
+            color: #0f0e0e;
+        }
+
+
+
+
+        /* ===== Wrapper Section ===== */
+        .projects-section {
+            font-family: "DM Mono",
+                monospace;
+            margin-top: 20vh;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5vh 0;
+            background-color: #2e2e2e;
+            color: #fff;
+            z-index: 1;
             /* jarak antara filter & slider */
         }
 
@@ -37,7 +406,7 @@
         .filter-section {
             display: flex;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
             /* jarak ke slider */
         }
 
@@ -196,6 +565,34 @@
 </head>
 
 <body>
+    <!-- SECTION BARU -->
+    <section class="container">
+
+    </section>
+
+    <!-- SECTION ABOUT ME -->
+    <section class="about anime-text-container">
+        <div class="copy-container">
+            <div class="anime-text">
+                <p>
+                    <span class="word">
+                        Hi
+                        <img src="images/hands.png" alt="hand wave" class="hand-icon">
+                    </span>
+                    I'm Mochamad Aldi Raihan Fachrizal, a fresh graduate and <span class="keyword">fullstack</span>
+                    web
+                    & mobile developer,
+                    passionate about building elegant and functional digital solutions — always learning, always
+                    creating.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CARD PORTO -->
+
+
+    <!-- SECTION PROJECT -->
     <section class="projects-section">
         <div class="filter-section">
             <span class="filter-pill active" data-category="All">All</span>
@@ -207,6 +604,280 @@
             <div class="slide-track"></div>
         </div>
     </section>
+
+
+    <!-- SECTION BARU -->
+    <section class="section--next">
+        <div class="section--next-wrapper">
+            <h2 class="section__title">Get In Touch</h2>
+            <p>If you’d like to collaborate or just say hi, feel free to contact me.</p>
+            <a href="#" class="btn-contact">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ----------- ANIMATE CARD PORTO -----------
+
+        ScrollTrigger.batch(".column__item", {
+            start: "top bottom",
+            onEnter: (batch) => {
+                gsap.fromTo(batch,
+                    { y: 100, opacity: 0, scale: 0.9 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        stagger: { each: 0.1, grid: [1, 3] }, // muncul bergiliran
+                        ease: "power3.out"
+                    }
+                );
+            },
+            onLeaveBack: (batch) => {
+                gsap.to(batch, { opacity: 0, y: 100, scale: 0.9, duration: 0.5 });
+            }
+        });
+
+        gsap.utils.toArray(".column-wrap").forEach((col, i) => {
+            gsap.to(col, {
+                yPercent: i % 2 === 0 ? -15 : 15,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".section--columns",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        // ----------- ANIMATE OUTRO -----------
+
+        // GSAP MatchMedia khusus mobile vs desktop
+        let mm = gsap.matchMedia();
+
+        // Desktop > 480px
+        mm.add("(min-width: 481px)", () => {
+            gsap.to(".outro-anim", {
+                y: "-80%",
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".section--outro",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.5
+                }
+            });
+        });
+
+        // Mobile ≤ 480px
+        mm.add("(max-width: 480px)", () => {
+            const outroWrapper = document.querySelector(".section--outro-wrapper");
+            if (outroWrapper) {
+                outroWrapper.style.marginTop = "0"; // reset margin
+                outroWrapper.style.transform = "translateY(-270vh)"; // naik separuh viewport
+            }
+        });
+
+    </script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ----------- ANIMATE ABOUTME -----------
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Smooth scroll pakai Lenis
+            const lenis = new Lenis();
+            lenis.on("scroll", ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+
+            const animeTextParagraphs = document.querySelectorAll(".anime-text p");
+
+            // Warna highlight dasar (abu-abu gelap)
+            const wordHighlightBgColor = "60, 60, 60";
+
+            // Kata kunci yang diwarnai khusus
+            const keywords = [
+                "fullstack",
+                "web",
+                "mobile",
+            ];
+
+            animeTextParagraphs.forEach((paragraph) => {
+                const text = paragraph.textContent.trim();
+                paragraph.innerHTML = "";
+
+                const words = text.split(/\s+/);
+                let isFirst = true;
+
+                words.forEach((word, idx) => {
+                    const span = document.createElement("span");
+                    span.className = "word";
+                    span.style.backgroundColor = `rgba(${wordHighlightBgColor}, 0)`; // default transparan
+                    span.style.borderRadius = "0.5rem"; // bulatan/rounded card
+                    span.style.padding = "0.1rem 0.3rem"; // sesuaikan padding
+
+                    // Gabungkan "Hi there!" dan sisipkan hand icon
+                    if (isFirst && word.toLowerCase() === "hi") {
+                        span.textContent = "Hi there! ";
+                        const img = document.createElement("img");
+                        img.src = "images/hands.png";
+                        img.alt = "hand wave";
+                        img.className = "hand-icon";
+                        span.appendChild(img);
+                        isFirst = false;
+                    } else if (idx > 1 || !isFirst) {
+                        span.textContent = word;
+                    }
+
+                    // jika kata termasuk keyword
+                    const normalizedWord = word.toLowerCase().replace(/[.,!?;:"]/g, "");
+                    if (keywords.includes(normalizedWord)) {
+                        span.classList.add("keyword-wrapper");
+                        const keywordSpan = document.createElement("span");
+                        keywordSpan.className = "keyword";
+                        keywordSpan.textContent = word;
+                        span.innerHTML = ""; // hapus teks sebelumnya
+                        span.appendChild(keywordSpan);
+                    }
+
+                    paragraph.appendChild(span);
+                    paragraph.appendChild(document.createTextNode(" "));
+                });
+            });
+
+            const animeTextContainers = document.querySelectorAll(".anime-text-container");
+
+            animeTextContainers.forEach((container) => {
+                // tentukan start value default
+                let startValue = "top 24%";
+
+                // cek jika layar kecil (misal <= 480px)
+                if (window.innerWidth <= 480) {
+                    startValue = "top 10%"; // contoh, lebih rendah untuk mobile
+                }
+
+                ScrollTrigger.create({
+                    trigger: container,
+                    pin: true,
+                    start: startValue,
+                    end: "+=100%",
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        const words = Array.from(container.querySelectorAll(".anime-text .word"));
+                        const totalWords = words.length;
+                        const overlapWords = 8;
+                        const lastWordEnd = (totalWords - 1 + overlapWords) / totalWords;
+
+                        words.forEach((word, index) => {
+                            const wordText = word.querySelector("span") || word;
+
+                            const wordStart = index / totalWords / lastWordEnd;
+                            const wordEnd = (index + overlapWords) / totalWords / lastWordEnd;
+                            const duration = wordEnd - wordStart;
+
+                            let wordProgress =
+                                progress <= wordStart ? 0 :
+                                    progress >= wordEnd ? 1 :
+                                        (progress - wordStart) / duration;
+
+                            // opacity kata
+                            word.style.opacity = wordProgress;
+
+                            // background highlight default (bulatan transparan)
+                            const backgroundFadeStart = wordProgress >= 0.9 ? (wordProgress - 0.9) / 0.1 : 0;
+                            const backgroundOpacity = Math.max(0, 1 - backgroundFadeStart);
+                            word.style.backgroundColor = `rgba(${wordHighlightBgColor}, ${backgroundOpacity})`;
+
+                            // teks muncul halus
+                            const textRevealThreshold = 0.9;
+                            const textRevealProgress =
+                                wordProgress < textRevealThreshold ? wordProgress / textRevealThreshold : 1;
+
+                            wordText.style.opacity = Math.pow(textRevealProgress, 0.5);
+                        });
+                    }
+                });
+            });
+
+
+            ScrollTrigger.refresh();
+        });
+    </script>
+
+    <script>
+        const el = document.querySelector(".title");
+        let elWidth = el.offsetWidth;
+        let windowWidth = window.innerWidth;
+
+        let scrollY = window.scrollY;
+        let prevScrollY = scrollY;
+
+        let skewTarget = 0;
+        let translateTarget = 0;
+
+        let skewWithEasing = 0;
+        let translateWithEasing = 0;
+
+        let skewEasingFactor = 0.05;       // lebih lambat untuk skew
+        let translateEasingFactor = 0.02;  // lebih lambat untuk translate
+
+        window.addEventListener("resize", handleWithResize);
+        window.addEventListener("scroll", handleScroll);
+
+        function handleScroll() {
+            scrollY = window.scrollY;
+        }
+
+        function handleWithResize() {
+            elWidth = el.offsetWidth;
+            windowWidth = window.innerWidth;
+        }
+
+        function lerp(start, end, factor) {
+            return (1 - factor) * start + factor * end;
+        }
+
+        function animateMe() {
+            // arah scroll = perbedaan scrollY
+            skewTarget = (scrollY - prevScrollY) * 5; // faktor ×2
+            prevScrollY = scrollY;
+
+            // semakin scroll ke bawah → teks geser kiri
+            translateTarget = -scrollY * 0.5; // 0.5 = speed
+
+            skewWithEasing = lerp(skewWithEasing, skewTarget, skewEasingFactor);
+            skewWithEasing = Math.min(Math.max(parseInt(skewWithEasing), -75), 75);
+
+            translateWithEasing = lerp(
+                translateWithEasing,
+                translateTarget,
+                translateEasingFactor
+            );
+
+            el.style.transform = `
+        translateX(${translateWithEasing}px)
+        skew(${skewWithEasing}deg)
+      `;
+
+            window.requestAnimationFrame(animateMe);
+        }
+
+        animateMe();
+    </script>
+
+
 
     <script>
         const sliderData = [
@@ -463,8 +1134,6 @@
 
         document.addEventListener("DOMContentLoaded", initializeSlider);
     </script>
-
-
 
 </body>
 
