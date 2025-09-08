@@ -4,451 +4,896 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax</title>
+    <title>Scroll Panels Effect</title>
     <style>
-        @import url("https://fonts.googleapis.com/css?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
 
         body {
-            height: 200vh;
-            font-family: "DM Mono", monospace;
-            background-color: #2e2e2e;
+            margin: 0;
+            font-family: sans-serif;
+            /*background: #0f0e0e;*/
+            background: #171715;
             color: #fff;
+            overflow-x: hidden;
         }
 
-        /* ===== Wrapper Section ===== */
-        .projects-section {
-            margin-top: 25vh;
-            width: 100%;
-            padding: 40px 20px;
+        /* ----------- SECTION INTRO ----------- */
+
+        .section--intro {
+            background: #0f0e0e;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            /* jarak antara filter & slider */
+            justify-content: center;
         }
 
-        /* ===== Filter Pills ===== */
-        .filter-section {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-            /* jarak ke slider */
+        .section__title {
+            font-weight: 300;
+            font-size: clamp(2rem, 17vw, 12.5rem);
+            margin: 5vh 0 6vh;
+            line-height: 0.9;
+            text-transform: none;
+            text-align: center;
         }
 
-        .filter-pill {
-            background-color: #444;
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+        /* ----------- SECTION ABOUTME ----------- */
 
-        .filter-pill:hover,
-        .filter-pill.active {
-            background-color: #666;
-        }
-
-        /* ===== Slider & Track ===== */
-        .slider {
-            position: relative;
+        .copy-container {
             width: 100%;
-            overflow: hidden;
-            user-select: none;
+            height: 100%;
             display: flex;
             justify-content: center;
-            /* center slide-track */
+            align-items: center;
+            text-align: center;
         }
 
-        .slide-track {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            /* jarak antar card */
+        .copy-container h1 {
+            width: 70%;
+            color: #141414;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
         }
 
-        /* ===== Slide Card ===== */
-        .slide {
-            flex-shrink: 0;
-            width: 500px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+
+        .anime-text {
+            font-family: "DM Sans", sans-serif;
+            width: 60%;
+            background-color: transparent;
+            /* atau #1a1a1a kalau mau menutupi */
+        }
+
+        .anime-text p {
+            color: #99948c;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .anime-text .word {
+            display: inline-block;
             position: relative;
+            margin-right: 0.2rem;
+            margin-bottom: 0.2rem;
+            padding: 0.1rem 0.2rem;
+            border-radius: 10rem;
+            will-change: background-color, opacity;
+        }
+
+        .anime-text .word.keyword-wrapper {
+            margin: 0 0.4rem 0.2rem 0.2rem;
+        }
+
+        .anime-text .word span {
+            position: relative;
+        }
+
+        .anime-text .word span.keyword {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border-radius: 2rem;
+            padding: 0.1rem 0;
+            color: #141414;
+        }
+
+        .anime-text .word span.keyword::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% + 1rem);
+            height: calc(100% + 0.4rem);
+            background-color: #fff;
+            border-radius: 2rem;
+            z-index: -1;
+        }
+
+        .anime-text .word,
+        .anime-text .word span {
+            opacity: 0;
+        }
+
+        .hand-icon {
+            width: 3rem;
+            height: auto;
+            vertical-align: middle;
+            margin-left: 0.3rem;
+            position: relative;
+            top: -0.4rem;
         }
 
         @media (max-width: 1000px) {
-            .slide {
-                width: 175px;
+            .copy-container {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .copy-container h1 {
+                width: 90%;
+                font-size: 2.5rem;
+                /* sedikit lebih besar */
+            }
+
+            .anime-text {
+                width: 90%;
+            }
+
+            .anime-text p {
+                font-size: 2rem;
+                line-height: 2.2rem;
+                /* jangan terlalu kecil */
+            }
+
+            .anime-text .word {
+                margin-right: -0.15rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .hand-icon {
+                width: 2.5rem;
+                /* sedikit lebih kecil */
+                top: -0.3rem;
+            }
+
+            .anime-text .word.keyword-wrapper {
+                margin: 0 0.2rem 0.4rem;
+                /* margin kanan dan bawah lebih besar */
+            }
+
+            .anime-text .word span.keyword::before {
+                width: calc(100% + 1rem);
+                /* lebih lebar */
+                height: calc(100% + 0.1rem);
+                /* lebih tinggi */
             }
         }
 
-        .slide-image {
-            width: 100%;
-            height: 350px;
+        /* ----------- SECTION CARD PORTO ----------- */
+
+        .section--columns {
+            margin-top: 25vh;
+            position: relative;
+            min-height: 100vh;
+            padding: 30vh 0;
+            width: 100vw;
             overflow: hidden;
-        }
-
-        .slide-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            will-change: transform;
-            transform: scale(2.25);
-            user-select: none;
-        }
-
-        .slide-text {
-            margin-top: 10px;
-            text-align: center;
-            max-width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .slide:hover .slide-text {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project-title {
-            font-weight: 500;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            color: #fff;
-        }
-
-        .project-desc {
-            font-weight: 300;
-            font-size: 0.85rem;
-            color: #ccc;
-            line-height: 1.4;
-        }
-
-        .project-skills {
-            margin-top: 20px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
             justify-content: center;
         }
 
-        .skill-pill {
-            background-color: #444;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 300;
-            transition: background 0.3s ease;
+        .columns-inner {
+            margin-top: -55rem;
+            margin-bottom: 10%;
+            display: flex;
+            gap: 1vw;
+            /* jarak antar kolom lebih rapat */
+            width: 200vw;
+            /* lebarkan container biar muat banyak kolom */
+            transform: rotate(-45deg);
+            transform-origin: center center;
         }
 
-        .skill-pill:hover {
-            background-color: #666;
-        }
-
-        /* Overlay text */
-        .slide-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+        .column-wrap {
+            flex: none;
+            /* jangan stretch otomatis */
+            width: 20vw;
+            /* setiap kolom lebih kecil */
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 10px 15px;
-            pointer-events: none;
-            z-index: 10;
-            transition: opacity 0.3s ease;
+            gap: 1vw;
+        }
+
+        /* optimasi performance */
+        .column__item {
+            width: 100%;
+            height: 30vh;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transform: scale(0.9);
             opacity: 0;
+            will-change: transform, opacity;
         }
 
-        .slide-overlay.active {
-            opacity: 1 !important;
+        .column__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .slide-overlay.active .project-desc {
-            opacity: 1;
-            transform: translateY(0);
+        /* ======================= */
+        /* RESPONSIVE MOBILE */
+        /* ======================= */
+        @media (max-width: 768px) {
+            .columns-inner {
+                width: 140vw;
+                /* kasih lebar ekstra biar muat rotasi */
+                gap: 5vw;
+                /* jarak antar kolom */
+            }
+
+            .column-wrap {
+                flex: none;
+                width: 45vw;
+                /* biar cuma 2 kolom pas mobile */
+                gap: 5vw;
+                /* JARAK VERTIKAL antar card ditambah */
+            }
+
+            .column__item {
+                aspect-ratio: 1/1;
+                /* jadi kotak persegi */
+                height: auto;
+                /* override tinggi default */
+            }
+
+            .section--columns {
+                min-height: 250vh;
+            }
         }
 
-        /* Arrow tetap di kanan bawah */
-        .project-arrow {
+        @media (max-width: 480px) {
+            .columns-inner {
+                width: 160vw;
+                /* makin lebar di hp kecil */
+            }
+
+            .column-wrap {
+                width: 60vw;
+                /* biar 2 kolom saja di hp kecil */
+                gap: 5vw;
+                /* jarak vertikal lebih lega di hp kecil */
+            }
+        }
+
+        /* ----------- SECTION OUTRO ----------- */
+
+        .section--outro {
+            position: relative;
+            height: 120vh;
+            z-index: 0;
+            /* base layer */
+        }
+
+        .section__title {
+            font-family: "DM Sans", sans-serif;
+            font-weight: 500;
+        }
+
+        /* ini jadi container animasi */
+        .outro-anim {
+            position: relative;
+            /* jangan absolute */
+            width: 100%;
+            will-change: transform;
+        }
+
+        .section--outro-wrapper {
+            margin-top: -210vh;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5vh 0;
+            background: #0f0e0e;
+            color: #fff;
+            z-index: 1;
+            /* pastikan konten di atas background */
+            /* pastikan di atas ::before */
+        }
+
+        .section--outro::before {
+            content: '';
             position: absolute;
-            right: 10px;
-            bottom: 10px;
-            width: 16px;
-            height: 16px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0e0e;
+            z-index: -1;
         }
 
-        .project-arrow svg {
-            stroke: #fff;
-            stroke-width: 2;
+        .outro-inner {
+            margin-top: 5rem;
+            display: flex;
+            gap: 2vw;
+            flex-wrap: wrap;
+            /* otomatis turun ke bawah */
+            justify-content: center;
+            width: 90%;
+        }
+
+        .outro-wrap {
+            flex: 1 1 20%;
+            /* fleksibel tapi rata */
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            min-width: 200px;
+        }
+
+        .outro__item {
+            width: 100%;
+            height: 25vh;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .outro__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ----------- SECTION NEXT (contoh tambahan) ----------- */
+        .section--next {
+            position: relative;
+            min-height: 100vh;
+            background: #1b1a1a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .section--next-wrapper {
+            max-width: 800px;
+            padding: 4rem 2rem;
+        }
+
+        .section--next .btn-contact {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .section--next .btn-contact:hover {
+            background: #fff;
+            color: #0f0e0e;
+        }
+
+
+
+
+        .container {
+            overflow: hidden;
+            cursor: ns-resize;
+            white-space: nowrap;
+            padding: 15vh 0;
+            margin: 55vh 0;
+            /* biar ada jarak atas–bawah saja */
+            width: 100%;
+            /* full lebar */
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-family: "Playfair Display", serif;
+            font-size: 10vw;
+            position: relative;
+            color: #99948c;
+            display: inline-block;
+            margin: 5vh;
+            padding: 0 0%;
+            will-change: transform;
+        }
+
+        /* versi mobile max-width 480px */
+        @media (max-width: 480px) {
+            .container {
+                position: relative;
+                /* biar ikut flow normal */
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 15vh 5vw;
+                margin: 0;
+                text-align: left;
+                /* rata kiri */
+            }
+
+            .title {
+                font-size: 15vw;
+                /* dibesarkan */
+                margin: 0;
+                line-height: 1.2;
+                white-space: normal;
+                /* biar bisa 2 baris */
+                word-break: break-word;
+                /* pecah kata kalau panjang */
+            }
         }
     </style>
 </head>
 
 <body>
-    <section class="projects-section">
-        <div class="filter-section">
-            <span class="filter-pill active" data-category="All">All</span>
-            <span class="filter-pill" data-category="web">Web</span>
-            <span class="filter-pill" data-category="mobile">Mobile</span>
-        </div>
+    <!-- Section Intro -->
+    <section class="container">
+        <p class="title">Fullstack Developer *</p>
+    </section>
 
-        <div class="slider">
-            <div class="slide-track"></div>
+    <!-- Section Aboutme -->
+    <section class="about anime-text-container">
+        <div class="copy-container">
+            <div class="anime-text">
+                <p>
+                    <span class="word">
+                        Hi
+                        <img src="images/hands.png" alt="hand wave" class="hand-icon">
+                    </span>
+                    I'm Mochamad Aldi Raihan Fachrizal, a fresh graduate and <span class="keyword">fullstack</span>
+                    web
+                    & mobile developer,
+                    passionate about building elegant and functional digital solutions — always learning, always
+                    creating.
+                </p>
+            </div>
         </div>
     </section>
 
+    <!-- Section Card Porto -->
+    <section class="section--columns">
+        <div class="columns-inner">
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+            </div>
+
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+            <div class="column-wrap">
+                <div class="column__item"><img src="images/build-2.jpg" alt="Build 2"></div>
+                <div class="column__item"><img src="images/build-3.jpg" alt="Build 3"></div>
+                <div class="column__item"><img src="images/build-4.jpg" alt="Build 4"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+                <div class="column__item"><img src="images/build-1.jpg" alt="Build 1"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section--outro">
+        <div class="outro-anim">
+            <div class="section--outro-wrapper">
+                <h2 class="section__title">Recents Project</h2>
+                <p>See more of my works soon.</p>
+
+                <div class="outro-inner">
+                    <div class="outro-wrap">
+                        <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                    </div>
+                    <div class="outro-wrap">
+                        <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-2.jpg" alt=""></div>
+                    </div>
+                    <div class="outro-wrap">
+                        <div class="outro__item"><img src="images/build-3.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-4.jpg" alt=""></div>
+                        <div class="outro__item"><img src="images/build-1.jpg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION BARU -->
+    <section class="section--next">
+        <div class="section--next-wrapper">
+            <h2 class="section__title">Get In Touch</h2>
+            <p>If you’d like to collaborate or just say hi, feel free to contact me.</p>
+            <a href="#" class="btn-contact">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
     <script>
-        const sliderData = [
-            {
-                img: "images/build-1.jpg",
-                title: "Smart Home Automation",
-                desc: "Sistem otomatisasi rumah pintar yang memungkinkan pengguna mengontrol lampu, AC, dan perangkat elektronik melalui aplikasi web, dengan jadwal dan notifikasi real-time.",
-                skills: ["React", "Tailwind", "Node.js"],
-                category: "web"
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ----------- ANIMATE CARD PORTO -----------
+
+        ScrollTrigger.batch(".column__item", {
+            start: "top bottom",
+            onEnter: (batch) => {
+                gsap.fromTo(batch,
+                    { y: 100, opacity: 0, scale: 0.9 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        stagger: { each: 0.1, grid: [1, 3] }, // muncul bergiliran
+                        ease: "power3.out"
+                    }
+                );
             },
-            {
-                img: "images/build-2.jpg",
-                title: "E-Commerce Platform",
-                desc: "Platform e-commerce modern dengan fitur katalog produk, keranjang belanja, pembayaran online, dan manajemen pesanan untuk pengalaman belanja yang cepat dan aman.",
-                skills: ["React", "Tailwind", "Node.js"],
-                category: "web"
-            },
-            {
-                img: "images/build-3.jpg",
-                title: "Fitness Tracker App",
-                desc: "Aplikasi mobile untuk memantau aktivitas olahraga, tidur, dan pola makan, serta memberikan rekomendasi harian agar pengguna mencapai target kebugaran mereka.",
-                skills: ["Flutter", "Firebase", "Chart.js"],
-                category: "mobile"
-            },
-            {
-                img: "images/build-4.jpg",
-                title: "Recipe & Meal Planner App",
-                desc: "Aplikasi mobile yang membantu pengguna menemukan resep masakan sehat, membuat daftar belanja, dan merencanakan menu mingguan dengan notifikasi pengingat.",
-                skills: ["Flutter", "Firebase", "REST API"],
-                category: "mobile"
+            onLeaveBack: (batch) => {
+                gsap.to(batch, { opacity: 0, y: 100, scale: 0.9, duration: 0.5 });
             }
-        ];
+        });
 
-        const config = { scrollSpeed: 1.75, lerpFactor: 0.05, maxVelocity: 150 };
-        let filteredData = [...sliderData];
-
-        const state = {
-            currentX: 0,
-            targetX: 0,
-            slideWidth: 390,
-            slides: [],
-            isDragging: false,
-            startX: 0,
-            lastX: 0,
-            lastMouseX: 0,
-            lastScrollTime: Date.now(),
-            isMoving: false,
-            velocity: 0,
-            lastCurrentX: 0,
-            dragDistance: 0,
-            hasActuallyDragged: false,
-            isMobile: false,
-            currentFilter: "All"
-        };
-
-        // ==== MOBILE CHECK ====
-        function checkMobile() { state.isMobile = window.innerWidth < 1000; }
-
-        // ==== CREATE SLIDE ====
-        function createSlideElement(data) {
-            const slide = document.createElement("div");
-            slide.className = "slide";
-            if (state.isMobile) slide.style.width = "175px";
-
-            const imageContainer = document.createElement("div");
-            imageContainer.className = "slide-image";
-            const img = document.createElement("img");
-            img.src = data.img;
-            img.alt = data.title;
-            imageContainer.appendChild(img);
-
-            const textContainer = document.createElement("div");
-            textContainer.className = "slide-text";
-
-            const title = document.createElement("p");
-            title.className = "project-title";
-            title.textContent = data.title;
-
-            const description = document.createElement("p");
-            description.className = "project-desc";
-            description.textContent = data.desc || "";
-
-            const skillsContainer = document.createElement("div");
-            skillsContainer.className = "project-skills";
-            data.skills.forEach(skill => {
-                const skillEl = document.createElement("span");
-                skillEl.className = "skill-pill";
-                skillEl.textContent = skill;
-                skillsContainer.appendChild(skillEl);
-            });
-
-            textContainer.appendChild(title);
-            textContainer.appendChild(description);
-            textContainer.appendChild(skillsContainer);
-
-            slide.appendChild(imageContainer);
-            slide.appendChild(textContainer);
-            slide.dataset.category = data.category;
-
-            return slide;
-        }
-
-        // ==== INITIALIZE SLIDES ====
-        function initializeSlides() {
-            const track = document.querySelector(".slide-track");
-            track.innerHTML = "";
-            state.slides = [];
-
-            checkMobile();
-            state.slideWidth = state.isMobile ? 215 : 390;
-
-            // Hanya buat copy jika lebih dari 1 slide (untuk infinite scroll)
-            let copies = filteredData.length > 1 ? 6 : 1;
-
-            filteredData.forEach(data => {
-                const slide = createSlideElement(data);
-                track.appendChild(slide);
-                state.slides.push(slide);
-            });
-
-            // Kalau hanya 1 slide, posisikan di tengah
-            if (filteredData.length === 1) {
-                track.style.display = "flex";
-                track.style.justifyContent = "center";
-                track.style.transform = "translate3d(0,0,0)";
-                state.currentX = 0;
-                state.targetX = 0;
-            } else {
-                track.style.display = "flex";
-                track.style.justifyContent = "flex-start";
-
-                // Duplikasi slides untuk infinite scroll
-                for (let i = 1; i < copies; i++) {
-                    filteredData.forEach(data => {
-                        const slide = createSlideElement(data);
-                        track.appendChild(slide);
-                        state.slides.push(slide);
-                    });
+        gsap.utils.toArray(".column-wrap").forEach((col, i) => {
+            gsap.to(col, {
+                yPercent: i % 2 === 0 ? -15 : 15,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".section--columns",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
                 }
-
-                const startOffset = -(filteredData.length * state.slideWidth * 2);
-                state.currentX = startOffset;
-                state.targetX = startOffset;
-                track.style.transform = `translate3d(${state.currentX}px,0,0)`;
-            }
-        }
-
-        // ==== UPDATE SLIDE POSITIONS ====
-        function updateSlidePositions() {
-            const track = document.querySelector(".slide-track");
-            if (filteredData.length <= 1) return; // tidak scroll kalau 1 item
-            const sequenceWidth = state.slideWidth * filteredData.length;
-
-            if (state.currentX > -sequenceWidth * 1) {
-                state.currentX -= sequenceWidth;
-                state.targetX -= sequenceWidth;
-            } else if (state.currentX < -sequenceWidth * 4) {
-                state.currentX += sequenceWidth;
-                state.targetX += sequenceWidth;
-            }
-
-            track.style.transform = `translate3d(${state.currentX}px, 0, 0)`;
-        }
-
-        // ==== PARALLAX ====
-        function updateParallax() {
-            const viewportCenter = window.innerWidth / 2;
-            state.slides.forEach(slide => {
-                if (slide.style.display === "none") return;
-                const img = slide.querySelector("img");
-                if (!img) return;
-                const slideRect = slide.getBoundingClientRect();
-                if (slideRect.right < -500 || slideRect.left > window.innerWidth + 500) return;
-                const slideCenter = slideRect.left + slideRect.width / 2;
-                const distanceFromCenter = slideCenter - viewportCenter;
-                const parallaxOffset = distanceFromCenter * -0.25;
-                img.style.transform = `translateX(${parallaxOffset}px) scale(2.25)`;
             });
-        }
+        });
 
-        // ==== ANIMATE ====
-        function updateMovingState() {
-            state.velocity = Math.abs(state.currentX - state.lastCurrentX);
-            state.lastCurrentX = state.currentX;
-            const isSlowEnough = state.velocity < 0.1;
-            const hasBeenStillLongEnough = Date.now() - state.lastScrollTime > 200;
-            state.isMoving = state.hasActuallyDragged || !isSlowEnough || !hasBeenStillLongEnough;
-            document.documentElement.style.setProperty("--slider-moving", state.isMoving ? "1" : "0");
-        }
+        // ----------- ANIMATE OUTRO -----------
 
-        function animate() {
-            state.currentX += (state.targetX - state.currentX) * config.lerpFactor;
-            updateMovingState();
-            updateSlidePositions();
-            updateParallax();
-            requestAnimationFrame(animate);
-        }
+        // GSAP MatchMedia khusus mobile vs desktop
+        let mm = gsap.matchMedia();
 
-        // ==== FILTER LOGIC ====
-        function applyFilter(category) {
-            state.currentFilter = category;
-            filteredData = category === "All" ? [...sliderData] : sliderData.filter(d => d.category === category);
-            initializeSlides();
-        }
-
-        // ==== EVENT LISTENERS ====
-        function initializeEventListeners() {
-            const slider = document.querySelector(".slider");
-            slider.addEventListener("wheel", e => {
-                if (Math.abs(e.deltaX) > 0) { e.preventDefault(); state.lastScrollTime = Date.now(); state.targetX += -e.deltaX * config.scrollSpeed; }
-            }, { passive: false });
-
-            slider.addEventListener("touchstart", e => { state.isDragging = true; state.startX = e.touches[0].clientX; state.lastX = state.targetX; });
-            slider.addEventListener("touchmove", e => { if (!state.isDragging) return; const deltaX = (e.touches[0].clientX - state.startX) * 1.5; state.targetX = state.lastX + deltaX; });
-            slider.addEventListener("touchend", () => state.isDragging = false);
-
-            slider.addEventListener("mousedown", e => { state.isDragging = true; state.startX = e.clientX; state.lastMouseX = e.clientX; state.lastX = state.targetX; });
-            document.addEventListener("mousemove", e => { if (!state.isDragging) return; const deltaX = e.clientX - state.lastMouseX; state.targetX += deltaX; state.lastMouseX = e.clientX; });
-            document.addEventListener("mouseup", () => state.isDragging = false);
-
-            window.addEventListener("resize", initializeSlides);
-
-            // FILTER PILLS
-            document.querySelectorAll(".filter-pill").forEach(pill => {
-                pill.addEventListener("click", () => {
-                    document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
-                    pill.classList.add("active");
-                    applyFilter(pill.dataset.category);
-                });
+        // Desktop > 480px
+        mm.add("(min-width: 481px)", () => {
+            gsap.to(".outro-anim", {
+                y: "-80%",
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".section--outro",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.5
+                }
             });
-        }
+        });
 
-        // ==== INIT SLIDER ====
-        function initializeSlider() { initializeSlides(); initializeEventListeners(); animate(); }
-        document.addEventListener("DOMContentLoaded", initializeSlider);
+        // Mobile ≤ 480px
+        mm.add("(max-width: 480px)", () => {
+            const outroWrapper = document.querySelector(".section--outro-wrapper");
+            if (outroWrapper) {
+                outroWrapper.style.marginTop = "0"; // reset margin
+                outroWrapper.style.transform = "translateY(-270vh)"; // naik separuh viewport
+            }
+        });
+
     </script>
 
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
 
+        // ----------- ANIMATE ABOUTME -----------
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Smooth scroll pakai Lenis
+            const lenis = new Lenis();
+            lenis.on("scroll", ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+
+            const animeTextParagraphs = document.querySelectorAll(".anime-text p");
+
+            // Warna highlight dasar (abu-abu gelap)
+            const wordHighlightBgColor = "60, 60, 60";
+
+            // Kata kunci yang diwarnai khusus
+            const keywords = [
+                "fullstack",
+                "web",
+                "mobile",
+            ];
+
+            animeTextParagraphs.forEach((paragraph) => {
+                const text = paragraph.textContent.trim();
+                paragraph.innerHTML = "";
+
+                const words = text.split(/\s+/);
+                let isFirst = true;
+
+                words.forEach((word, idx) => {
+                    const span = document.createElement("span");
+                    span.className = "word";
+                    span.style.backgroundColor = `rgba(${wordHighlightBgColor}, 0)`; // default transparan
+                    span.style.borderRadius = "0.5rem"; // bulatan/rounded card
+                    span.style.padding = "0.1rem 0.3rem"; // sesuaikan padding
+
+                    // Gabungkan "Hi there!" dan sisipkan hand icon
+                    if (isFirst && word.toLowerCase() === "hi") {
+                        span.textContent = "Hi there! ";
+                        const img = document.createElement("img");
+                        img.src = "images/hands.png";
+                        img.alt = "hand wave";
+                        img.className = "hand-icon";
+                        span.appendChild(img);
+                        isFirst = false;
+                    } else if (idx > 1 || !isFirst) {
+                        span.textContent = word;
+                    }
+
+                    // jika kata termasuk keyword
+                    const normalizedWord = word.toLowerCase().replace(/[.,!?;:"]/g, "");
+                    if (keywords.includes(normalizedWord)) {
+                        span.classList.add("keyword-wrapper");
+                        const keywordSpan = document.createElement("span");
+                        keywordSpan.className = "keyword";
+                        keywordSpan.textContent = word;
+                        span.innerHTML = ""; // hapus teks sebelumnya
+                        span.appendChild(keywordSpan);
+                    }
+
+                    paragraph.appendChild(span);
+                    paragraph.appendChild(document.createTextNode(" "));
+                });
+            });
+
+            const animeTextContainers = document.querySelectorAll(".anime-text-container");
+
+            animeTextContainers.forEach((container) => {
+                // tentukan start value default
+                let startValue = "top 24%";
+
+                // cek jika layar kecil (misal <= 480px)
+                if (window.innerWidth <= 480) {
+                    startValue = "top 10%"; // contoh, lebih rendah untuk mobile
+                }
+
+                ScrollTrigger.create({
+                    trigger: container,
+                    pin: true,
+                    start: startValue,
+                    end: "+=100%",
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        const words = Array.from(container.querySelectorAll(".anime-text .word"));
+                        const totalWords = words.length;
+                        const overlapWords = 8;
+                        const lastWordEnd = (totalWords - 1 + overlapWords) / totalWords;
+
+                        words.forEach((word, index) => {
+                            const wordText = word.querySelector("span") || word;
+
+                            const wordStart = index / totalWords / lastWordEnd;
+                            const wordEnd = (index + overlapWords) / totalWords / lastWordEnd;
+                            const duration = wordEnd - wordStart;
+
+                            let wordProgress =
+                                progress <= wordStart ? 0 :
+                                    progress >= wordEnd ? 1 :
+                                        (progress - wordStart) / duration;
+
+                            // opacity kata
+                            word.style.opacity = wordProgress;
+
+                            // background highlight default (bulatan transparan)
+                            const backgroundFadeStart = wordProgress >= 0.9 ? (wordProgress - 0.9) / 0.1 : 0;
+                            const backgroundOpacity = Math.max(0, 1 - backgroundFadeStart);
+                            word.style.backgroundColor = `rgba(${wordHighlightBgColor}, ${backgroundOpacity})`;
+
+                            // teks muncul halus
+                            const textRevealThreshold = 0.9;
+                            const textRevealProgress =
+                                wordProgress < textRevealThreshold ? wordProgress / textRevealThreshold : 1;
+
+                            wordText.style.opacity = Math.pow(textRevealProgress, 0.5);
+                        });
+                    }
+                });
+            });
+
+
+            ScrollTrigger.refresh();
+        });
+    </script>
+
+    <script>
+        const el = document.querySelector(".title");
+        let elWidth = el.offsetWidth;
+        let windowWidth = window.innerWidth;
+
+        let scrollY = window.scrollY;
+        let prevScrollY = scrollY;
+
+        let skewTarget = 0;
+        let translateTarget = 0;
+
+        let skewWithEasing = 0;
+        let translateWithEasing = 0;
+
+        let skewEasingFactor = 0.05;       // lebih lambat untuk skew
+        let translateEasingFactor = 0.02;  // lebih lambat untuk translate
+
+        window.addEventListener("resize", handleWithResize);
+        window.addEventListener("scroll", handleScroll);
+
+        function handleScroll() {
+            scrollY = window.scrollY;
+        }
+
+        function handleWithResize() {
+            elWidth = el.offsetWidth;
+            windowWidth = window.innerWidth;
+        }
+
+        function lerp(start, end, factor) {
+            return (1 - factor) * start + factor * end;
+        }
+
+        function animateMe() {
+            // arah scroll = perbedaan scrollY
+            skewTarget = (scrollY - prevScrollY) * 5; // faktor ×2
+            prevScrollY = scrollY;
+
+            // semakin scroll ke bawah → teks geser kiri
+            translateTarget = -scrollY * 0.5; // 0.5 = speed
+
+            skewWithEasing = lerp(skewWithEasing, skewTarget, skewEasingFactor);
+            skewWithEasing = Math.min(Math.max(parseInt(skewWithEasing), -75), 75);
+
+            translateWithEasing = lerp(
+                translateWithEasing,
+                translateTarget,
+                translateEasingFactor
+            );
+
+            el.style.transform = `
+        translateX(${translateWithEasing}px)
+        skew(${skewWithEasing}deg)
+      `;
+
+            window.requestAnimationFrame(animateMe);
+        }
+
+        animateMe();
+    </script>
 </body>
 
 </html>

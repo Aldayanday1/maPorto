@@ -15,40 +15,85 @@
         }
 
         body {
+            height: 200vh;
             font-family: "DM Mono", monospace;
             background-color: #2e2e2e;
             color: #fff;
         }
 
+        /* ===== Wrapper Section ===== */
+        .projects-section {
+            margin-top: 25vh;
+            width: 100%;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            /* jarak antara filter & slider */
+        }
+
+        /* ===== Filter Pills ===== */
+        .filter-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            /* jarak ke slider */
+        }
+
+        .filter-pill {
+            background-color: #444;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .filter-pill:hover,
+        .filter-pill.active {
+            background-color: #666;
+        }
+
+        /* ===== Slider & Track ===== */
         .slider {
             position: relative;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
             overflow: hidden;
             user-select: none;
+            display: flex;
+            justify-content: center;
+            /* center slide-track */
         }
 
         .slide-track {
-            position: absolute;
-            width: 100%;
-            height: 100%;
             display: flex;
+            align-items: center;
+            gap: 20px;
+            /* jarak antar card */
         }
 
+        /* ===== Slide Card ===== */
         .slide {
             flex-shrink: 0;
-            width: 350px;
-            height: 500px;
-            margin: 0 20px;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
+            width: 500px;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        @media (max-width: 1000px) {
+            .slide {
+                width: 175px;
+            }
         }
 
         .slide-image {
             width: 100%;
-            height: 100%;
+            height: 350px;
             overflow: hidden;
         }
 
@@ -61,56 +106,144 @@
             user-select: none;
         }
 
-        .slide-overlay {
-            position: absolute;
-            bottom: -1.75rem;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            pointer-events: none;
-            z-index: 10;
-            transition: opacity 0.3s ease;
+        .slide-text {
+            margin-top: 10px;
+            text-align: center;
+            max-width: 100%;
             opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .slide:hover .slide-overlay {
-            opacity: calc(1 * var(--slider-moving, 1));
+        .slide:hover .slide-text {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .project-title {
             font-weight: 500;
-            font-size: 0.8rem;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            color: #fff;
         }
 
-        .project-arrow {
-            width: 16px;
-            height: 16px;
+        .project-desc {
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.4;
         }
 
-        .project-arrow svg {
-            stroke: #fff;
-            stroke-width: 2;
+        .project-skills {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .skill-pill {
+            background-color: #444;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 300;
+            transition: background 0.3s ease;
+        }
+
+        .skill-pill:hover {
+            background-color: #666;
+        }
+
+        @media (max-width: 1000px) {
+            .slide {
+                width: 250px;
+                /* lebar persegi panjang */
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .slide-image {
+                height: 180px;
+                /* tinggi proporsional */
+            }
+
+            .slide-text {
+                opacity: 1;
+                /* selalu muncul di mobile */
+                transform: translateY(0);
+                padding: 10px;
+            }
+
+            .project-title {
+                font-size: 0.95rem;
+                margin-top: 10px;
+                margin-bottom: 8px;
+            }
+
+            .project-desc {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="slider">
-        <div class="slide-track"></div>
-    </div>
+    <section class="projects-section">
+        <div class="filter-section">
+            <span class="filter-pill active" data-category="All">All</span>
+            <span class="filter-pill" data-category="web">Web</span>
+            <span class="filter-pill" data-category="mobile">Mobile</span>
+        </div>
 
-    <script type="module">
-        import { sliderData } from "./sliderData.js";
+        <div class="slider">
+            <div class="slide-track"></div>
+        </div>
+    </section>
 
-        const config = {
-            scrollSpeed: 1.75,
-            lerpFactor: 0.05,
-            maxVelocity: 150,
-        };
+    <script>
+        const sliderData = [
+            {
+                img: "images/build-1.jpg",
+                title: "Smart Home Automation",
+                desc: "Sistem otomatisasi rumah pintar yang memungkinkan pengguna mengontrol lampu, AC, dan perangkat elektronik melalui aplikasi web, dengan jadwal dan notifikasi real-time.",
+                skills: ["React", "Tailwind", "Node.js"],
+                category: "web"
+            },
+            {
+                img: "images/build-2.jpg",
+                title: "E-Commerce Platform",
+                desc: "Platform e-commerce modern dengan fitur katalog produk, keranjang belanja, pembayaran online, dan manajemen pesanan untuk pengalaman belanja yang cepat dan aman.",
+                skills: ["React", "Tailwind", "Node.js"],
+                category: "web"
+            },
+            {
+                img: "images/build-3.jpg",
+                title: "Fitness Tracker App",
+                desc: "Aplikasi mobile untuk memantau aktivitas olahraga, tidur, dan pola makan, serta memberikan rekomendasi harian agar pengguna mencapai target kebugaran mereka.",
+                skills: ["Flutter", "Firebase", "Chart.js"],
+                category: "web"
+            },
+            {
+                img: "images/build-4.jpg",
+                title: "Recipe & Meal Planner App",
+                desc: "Aplikasi mobile yang membantu pengguna menemukan resep masakan sehat, membuat daftar belanja, dan merencanakan menu mingguan dengan notifikasi pengingat.",
+                skills: ["Flutter", "Firebase", "REST API"],
+                category: "mobile"
+            },
+            {
+                img: "images/build-1.jpg",
+                title: "Recipe & Meal Planner App",
+                desc: "Aplikasi mobile yang membantu pengguna menemukan resep masakan sehat, membuat daftar belanja, dan merencanakan menu mingguan dengan notifikasi pengingat.",
+                skills: ["Flutter", "Firebase", "REST API"],
+                category: "mobile"
+            },
+        ];
 
-        const totalSlideCount = sliderData.length;
+        const config = { scrollSpeed: 1.75, lerpFactor: 0.08 };
+        let filteredData = [...sliderData];
 
         const state = {
             currentX: 0,
@@ -122,226 +255,179 @@
             lastX: 0,
             lastMouseX: 0,
             lastScrollTime: Date.now(),
-            isMoving: false,
-            velocity: 0,
-            lastCurrentX: 0,
-            dragDistance: 0,
-            hasActuallyDragged: false,
             isMobile: false,
+            currentFilter: "All"
         };
 
+        // ==== MOBILE CHECK ====
         function checkMobile() {
             state.isMobile = window.innerWidth < 1000;
+            state.slideWidth = state.isMobile ? 215 : 390;
         }
 
-        function createSlideElement(index) {
+        // ==== CREATE SLIDE ====
+        function createSlideElement(data) {
             const slide = document.createElement("div");
             slide.className = "slide";
 
-            if (state.isMobile) {
-                slide.style.width = "175px";
-                slide.style.height = "250px";
-            }
-
-            const imageContainer = document.createElement("div");
-            imageContainer.className = "slide-image";
-
+            const imgContainer = document.createElement("div");
+            imgContainer.className = "slide-image";
             const img = document.createElement("img");
-            const dataIndex = index % totalSlideCount;
-            img.src = sliderData[dataIndex].img;
-            img.alt = sliderData[dataIndex].title;
+            img.src = data.img;
+            img.alt = data.title;
+            imgContainer.appendChild(img);
 
-            const overlay = document.createElement("div");
-            overlay.className = "slide-overlay";
+            const textContainer = document.createElement("div");
+            textContainer.className = "slide-text";
+
+            if (state.isMobile) {
+                textContainer.style.opacity = "1"; // langsung tampil
+                textContainer.style.transform = "translateY(0)";
+            }
 
             const title = document.createElement("p");
             title.className = "project-title";
-            title.textContent = sliderData[dataIndex].title;
+            title.textContent = data.title;
 
-            const arrow = document.createElement("div");
-            arrow.className = "project-arrow";
-            arrow.innerHTML = `
-        <svg viewBox="0 0 24 24">
-          <path d="M7 17L17 7M17 7H7M17 7V17"/>
-        </svg>
-      `;
+            const desc = document.createElement("p");
+            desc.className = "project-desc";
+            desc.textContent = data.desc || "";
 
-            slide.addEventListener("click", (e) => {
-                e.preventDefault();
-                if (state.dragDistance < 10 && !state.hasActuallyDragged) {
-                    window.location.href = sliderData[dataIndex].url;
-                }
+            const skillsContainer = document.createElement("div");
+            skillsContainer.className = "project-skills";
+            data.skills.forEach(skill => {
+                const skillEl = document.createElement("span");
+                skillEl.className = "skill-pill";
+                skillEl.textContent = skill;
+                skillsContainer.appendChild(skillEl);
             });
 
-            overlay.appendChild(title);
-            overlay.appendChild(arrow);
-            imageContainer.appendChild(img);
-            slide.appendChild(imageContainer);
-            slide.appendChild(overlay);
+            textContainer.appendChild(title);
+            textContainer.appendChild(desc);
+            textContainer.appendChild(skillsContainer);
+
+            slide.appendChild(imgContainer);
+            slide.appendChild(textContainer);
+            slide.dataset.category = data.category;
 
             return slide;
         }
 
+
+        // ==== INITIALIZE SLIDES ====
         function initializeSlides() {
             const track = document.querySelector(".slide-track");
-            track.innerHTML = "";
+            track.innerHTML = ""; // clear track
             state.slides = [];
 
+            // cek mobile & set slideWidth
             checkMobile();
             state.slideWidth = state.isMobile ? 215 : 390;
 
-            const copies = 6;
-            const totalSlides = totalSlideCount * copies;
-
-            for (let i = 0; i < totalSlides; i++) {
-                const slide = createSlideElement(i);
+            // ==== Tambahkan semua card satu per satu ====
+            filteredData.forEach(data => {
+                const slide = createSlideElement(data);
                 track.appendChild(slide);
                 state.slides.push(slide);
-            }
+            });
 
-            const startOffset = -(totalSlideCount * state.slideWidth * 2);
-            state.currentX = startOffset;
-            state.targetX = startOffset;
+            // set posisi awal
+            state.currentX = 0;
+            state.targetX = 0;
+            track.style.transform = `translate3d(${state.currentX}px,0,0)`;
         }
 
+        // ==== UPDATE SLIDE POSITIONS ====
         function updateSlidePositions() {
             const track = document.querySelector(".slide-track");
-            const sequenceWidth = state.slideWidth * totalSlideCount;
+            if (filteredData.length <= 1) return;
 
-            if (state.currentX > -sequenceWidth * 1) {
-                state.currentX -= sequenceWidth;
-                state.targetX -= sequenceWidth;
-            } else if (state.currentX < -sequenceWidth * 4) {
-                state.currentX += sequenceWidth;
-                state.targetX += sequenceWidth;
-            }
-
+            // update posisi track sesuai currentX
             track.style.transform = `translate3d(${state.currentX}px, 0, 0)`;
         }
 
+        // ==== PARALLAX ====
         function updateParallax() {
             const viewportCenter = window.innerWidth / 2;
-
-            state.slides.forEach((slide) => {
+            state.slides.forEach(slide => {
                 const img = slide.querySelector("img");
                 if (!img) return;
-
-                const slideRect = slide.getBoundingClientRect();
-
-                if (slideRect.right < -500 || slideRect.left > window.innerWidth + 500) {
-                    return;
-                }
-
-                const slideCenter = slideRect.left + slideRect.width / 2;
-                const distanceFromCenter = slideCenter - viewportCenter;
-                const parallaxOffset = distanceFromCenter * -0.25;
-
-                img.style.transform = `translateX(${parallaxOffset}px) scale(2.25)`;
+                const rect = slide.getBoundingClientRect();
+                const slideCenter = rect.left + rect.width / 2;
+                const offset = (slideCenter - viewportCenter) * -0.25;
+                img.style.transform = `translateX(${offset}px) scale(2.25)`;
             });
         }
 
-        function updateMovingState() {
-            state.velocity = Math.abs(state.currentX - state.lastCurrentX);
-            state.lastCurrentX = state.currentX;
-
-            const isSlowEnough = state.velocity < 0.1;
-            const hasBeenStillLongEnough = Date.now() - state.lastScrollTime > 200;
-            state.isMoving = state.hasActuallyDragged || !isSlowEnough || !hasBeenStillLongEnough;
-
-            document.documentElement.style.setProperty(
-                "--slider-moving",
-                state.isMoving ? "1" : "0"
-            );
-        }
-
+        // ==== ANIMATE ====
         function animate() {
             state.currentX += (state.targetX - state.currentX) * config.lerpFactor;
-            updateMovingState();
             updateSlidePositions();
             updateParallax();
             requestAnimationFrame(animate);
         }
 
-        function handleWheel(e) {
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-            e.preventDefault();
-            state.lastScrollTime = Date.now();
-
-            const scrollDelta = e.deltaY * config.scrollSpeed;
-            state.targetX = Math.max(
-                Math.min(state.targetX + scrollDelta, config.maxVelocity),
-                -config.maxVelocity
-            );
-        }
-
-        function handleTouchStart(e) {
-            state.isDragging = true;
-            state.startX = e.touches[0].clientX;
-            state.lastX = state.targetX;
-            state.dragDistance = 0;
-            state.hasActuallyDragged = false;
-            state.lastScrollTime = Date.now();
-        }
-
-        function handleTouchMove(e) {
-            if (!state.isDragging) return;
-            const deltaX = (e.touches[0].clientX - state.startX) * 1.5;
-            state.targetX = state.lastX + deltaX;
-            state.dragDistance = Math.abs(deltaX);
-            if (state.dragDistance > 5) state.hasActuallyDragged = true;
-            state.lastScrollTime = Date.now();
-        }
-
-        function handleTouchEnd() {
-            state.isDragging = false;
-            setTimeout(() => (state.hasActuallyDragged = false), 100);
-        }
-
-        function handleMouseDown(e) {
-            e.preventDefault();
-            state.isDragging = true;
-            state.startX = e.clientX;
-            state.lastMouseX = e.clientX;
-            state.lastX = state.targetX;
-            state.dragDistance = 0;
-            state.hasActuallyDragged = false;
-            state.lastScrollTime = Date.now();
-        }
-
-        function handleMouseMove(e) {
-            if (!state.isDragging) return;
-            e.preventDefault();
-            const deltaX = (e.clientX - state.lastMouseX) * 2;
-            state.targetX += deltaX;
-            state.lastMouseX = e.clientX;
-            state.dragDistance += Math.abs(deltaX);
-            if (state.dragDistance > 5) state.hasActuallyDragged = true;
-            state.lastScrollTime = Date.now();
-        }
-
-        function handleMouseUp() {
-            state.isDragging = false;
-            setTimeout(() => (state.hasActuallyDragged = false), 100);
-        }
-
-        function handleResize() {
+        // ==== FILTER LOGIC ====
+        function applyFilter(category) {
+            state.currentFilter = category;
+            filteredData = category === "All" ? [...sliderData] : sliderData.filter(d => d.category === category);
             initializeSlides();
         }
 
+        // ==== EVENT LISTENERS ====
         function initializeEventListeners() {
             const slider = document.querySelector(".slider");
-            slider.addEventListener("wheel", handleWheel, { passive: false });
-            slider.addEventListener("touchstart", handleTouchStart);
-            slider.addEventListener("touchmove", handleTouchMove);
-            slider.addEventListener("touchend", handleTouchEnd);
-            slider.addEventListener("mousedown", handleMouseDown);
-            slider.addEventListener("mouseleave", handleMouseUp);
-            slider.addEventListener("dragstart", (e) => e.preventDefault());
-            document.addEventListener("mousemove", handleMouseMove);
-            document.addEventListener("mouseup", handleMouseUp);
-            window.addEventListener("resize", handleResize);
+
+            slider.addEventListener("wheel", e => {
+                if (Math.abs(e.deltaX) > 0) {
+                    e.preventDefault();
+                    state.targetX += -e.deltaX * config.scrollSpeed;
+                }
+            }, { passive: false });
+
+            slider.addEventListener("touchstart", e => {
+                state.isDragging = true;
+                state.startX = e.touches[0].clientX;
+                state.lastX = state.targetX;
+            });
+
+            slider.addEventListener("touchmove", e => {
+                if (!state.isDragging) return;
+                const delta = e.touches[0].clientX - state.startX;
+                state.targetX = state.lastX + delta;
+            });
+
+            slider.addEventListener("touchend", () => state.isDragging = false);
+
+            slider.addEventListener("mousedown", e => {
+                state.isDragging = true;
+                state.startX = e.clientX;
+                state.lastMouseX = e.clientX;
+                state.lastX = state.targetX;
+            });
+
+            document.addEventListener("mousemove", e => {
+                if (!state.isDragging) return;
+                const delta = e.clientX - state.lastMouseX;
+                state.targetX += delta;
+                state.lastMouseX = e.clientX;
+            });
+
+            document.addEventListener("mouseup", () => state.isDragging = false);
+
+            window.addEventListener("resize", initializeSlides);
+
+            // FILTER PILLS
+            document.querySelectorAll(".filter-pill").forEach(pill => {
+                pill.addEventListener("click", () => {
+                    document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+                    pill.classList.add("active");
+                    applyFilter(pill.dataset.category);
+                });
+            });
         }
 
+        // ==== INIT SLIDER ====
         function initializeSlider() {
             initializeSlides();
             initializeEventListeners();
@@ -350,6 +436,9 @@
 
         document.addEventListener("DOMContentLoaded", initializeSlider);
     </script>
+
+
+
 </body>
 
 </html>
