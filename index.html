@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scroll Panels Effect</title>
+    <script src="https://kit.fontawesome.com/b67800fc75.js" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
         @import url("https://fonts.googleapis.com/css?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
@@ -28,9 +29,23 @@
             font-family: "DM Sans", sans-serif;
         }
 
+        .intro-section p i.fa-location-dot {
+            color: #eb97fc;
+            /* icon ungu */
+            margin-right: 8px;
+            /* jarak icon ke teks */
+        }
+
+        .intro-status {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 3vh;
+            /* jarak ke lokasi */
+        }
+
         .intro-container {
             text-align: center;
-            max-width: 600px;
+            max-width: 100%;
             padding: 0 20px;
         }
 
@@ -46,7 +61,6 @@
             margin-bottom: 5px;
         }
 
-
         /* Nama */
         .intro-name {
             font-size: 42px;
@@ -61,33 +75,35 @@
             font-weight: 300;
             color: #ccc;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 2vh;
         }
 
-        /* Pills / Capsule - garis per pill */
+        /* Pills / Capsule - bulat */
         .intro-pills {
+            margin-top: 3vh;
             display: flex;
             justify-content: center;
             gap: 12px;
         }
 
         .intro-pills .pill {
-            background-color: transparent;
-            /* tidak ada background */
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #444;
             color: #fff;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            border: 2px solid #555;
-            /* garis per pill */
-            transition: all 0.3s ease;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            /* ukuran icon */
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
         }
 
-        .intro-pills .pill.active {
-            color: #008cff;
-            border-color: #008cff;
-            /* garis berubah warna saat aktif */
+        .intro-pills .pill:hover {
+            background-color: #464646;
+            transform: scale(1.1);
         }
 
         /* ----------- SECTION ABOUTME ----------- */
@@ -329,93 +345,11 @@
             }
         }
 
-        /* ----------- SECTION OUTRO ----------- */
-
-        .section--outro {
-            position: relative;
-            height: 120vh;
-            z-index: 0;
-            /* base layer */
-        }
-
-        .section__title {
-            font-family: "DM Sans", sans-serif;
-            font-weight: 500;
-        }
-
-        /* ini jadi container animasi */
-        .outro-anim {
-            position: relative;
-            /* jangan absolute */
-            width: 100%;
-            will-change: transform;
-        }
-
-        .section--outro-wrapper {
-            margin-top: -210vh;
-            position: relative;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 5vh 0;
-            background: #0f0e0e;
-            color: #fff;
-            z-index: 1;
-            /* pastikan konten di atas background */
-            /* pastikan di atas ::before */
-        }
-
-        .section--outro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0f0e0e;
-            z-index: -1;
-        }
-
-        .outro-inner {
-            margin-top: 5rem;
-            display: flex;
-            gap: 2vw;
-            flex-wrap: wrap;
-            /* otomatis turun ke bawah */
-            justify-content: center;
-            width: 90%;
-        }
-
-        .outro-wrap {
-            flex: 1 1 20%;
-            /* fleksibel tapi rata */
-            display: flex;
-            flex-direction: column;
-            gap: 2vh;
-            min-width: 200px;
-        }
-
-        .outro__item {
-            width: 100%;
-            height: 25vh;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #222;
-        }
-
-        .outro__item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         /* ----------- SECTION NEXT (contoh tambahan) ----------- */
         .section--next {
             position: relative;
             min-height: 100vh;
-            background: #1b1a1a;
+            background-color: #2e2e2e;
             color: #fff;
             display: flex;
             align-items: center;
@@ -449,6 +383,7 @@
 
         /* ===== Wrapper Section ===== */
         .projects-section {
+            margin-top: 10vh;
             font-family: "DM Sans", sans-serif;
             position: relative;
             width: 100%;
@@ -587,7 +522,7 @@
             background-color: #666;
         }
 
-        @media (max-width: 1000px) {
+        @media (max-width: 480px) {
             .slide {
                 width: 250px;
                 /* lebar persegi panjang */
@@ -612,6 +547,10 @@
                 /* center text vertikal */
             }
 
+            .projects-section {
+                margin-top: 5vh;
+            }
+
             .project-title {
                 font-size: 0.95rem;
                 margin-top: 10px;
@@ -622,6 +561,141 @@
                 font-size: 0.8rem;
             }
         }
+
+
+
+
+
+
+
+
+        .paper-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 10000px;
+            flex-direction: column;
+        }
+
+        .paper-container {
+            width: 520px;
+            height: 680px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .fold {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 33.333%;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            background: #fff;
+        }
+
+        .fold1 {
+            top: 0;
+            transform-origin: top center;
+            z-index: 3;
+        }
+
+        .fold2 {
+            top: 33.333%;
+            transform-origin: top center;
+            z-index: 2;
+        }
+
+        .fold3 {
+            top: 66.666%;
+            transform-origin: top center;
+            z-index: 1;
+        }
+
+        /* overlay shadow efek lipatan */
+        .fold::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+            opacity: 0.6;
+        }
+
+        .fold img {
+            width: 100%;
+            height: 680px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fold1 img {
+            transform: translateY(0%);
+        }
+
+        .fold2 img {
+            transform: translateY(-33.333%);
+        }
+
+        .fold3 img {
+            transform: translateY(-66.666%);
+        }
+
+        .content {
+            min-height: 200vh;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        /* ======================= */
+        /* RESPONSIVE MOBILE/TABLET */
+        /* ======================= */
+
+        /* Tablet */
+        @media screen and (max-width: 768px) {
+            .paper-container {
+                width: 400px;
+                height: 520px;
+                margin-top: 120vh;
+            }
+
+            .fold img {
+                height: 520px;
+            }
+
+            .content h2 {
+                font-size: 1.5rem;
+            }
+
+            .content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile */
+        @media screen and (max-width: 480px) {
+            .paper-container {
+                width: 300px;
+                height: 400px;
+                margin-top: 120vh;
+            }
+
+            .fold img {
+                height: 400px;
+            }
+
+            .content h2 {
+                font-size: 1.2rem;
+            }
+
+            .content p {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -629,22 +703,39 @@
     <!-- SECTION INTRO -->
     <section class="intro-section">
         <div class="intro-container">
+
+            <!-- Status Aktif -->
+            <p class="intro-status">
+                <i class="fa-solid fa-code"></i> Active
+            </p>
+
             <!-- Foto Profil -->
             <img src="images/profile.png" alt="Profile Picture" class="intro-profile">
 
             <!-- Nama -->
-            <h1 class="intro-name">Aldi Raihan</h1>
+            <h1 class="intro-name">Mochamad Aldi Raihan Fachrizal</h1>
 
             <!-- Deskripsi singkat -->
             <p class="intro-desc">
-                Fullstack Developer | Web Dev | Mobile Apps
+                Fullstack Developer | Web & Mobile Apps
+            </p>
+
+            <!-- Lokasi -->
+            <p>
+                <i class="fa-solid fa-location-dot"></i> Yogyakarta, Indonesia.
             </p>
 
             <!-- Capsule / Pills -->
             <div class="intro-pills">
-                <span class="pill">Web</span>
-                <span class="pill">Mobile</span>
-                <span class="pill">Other</span>
+                <a href="https://github.com/Aldayanday1?tab=repositories" target="_blank" class="pill" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.youtube.com/@youw4nabe" target="_blank" class="pill" title="GitHub">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="https://www.youtube.com/@youw4nabe" target="_blank" class="pill" title="GitHub">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -681,6 +772,17 @@
         </div>
     </section>
 
+    <section class="paper-section">
+        <div class="paper-container">
+            <div class="fold fold1"><img src="images/paper.png" alt="Fold 1"></div>
+            <div class="fold fold2"><img src="images/paper.png" alt="Fold 2"></div>
+            <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
+        </div>
+        <div class="content">
+            <p>Curriculum Vitae</p>
+        </div>
+    </section>
+
     <!-- SECTION BARU -->
     <section class="section--next">
         <div class="section--next-wrapper">
@@ -694,6 +796,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
+    <script src="https://kit.fontawesome.com/b67800fc75.js" crossorigin="anonymous"></script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -768,7 +871,7 @@
 
             animeTextContainers.forEach((container) => {
                 // tentukan start value default
-                let startValue = "top 24%";
+                let startValue = "top 10%";
 
                 // cek jika layar kecil (misal <= 480px)
                 if (window.innerWidth <= 480) {
@@ -1144,6 +1247,66 @@
         }
 
         document.addEventListener("DOMContentLoaded", initializeSlider);
+    </script>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // =========================
+        // Konfigurasi per device
+        // =========================
+        let totalScroll; // total panjang scroll area untuk timeline
+
+        if (window.innerWidth <= 480) {
+            // 📱 Mobile → super cepat banget
+            totalScroll = 80;
+        } else if (window.innerWidth <= 768) {
+            // 📲 Tablet → lebih cepat
+            totalScroll = 105;
+        } else {
+            // 💻 Desktop → tetap normal
+            totalScroll = 220;
+        }
+
+        // Set posisi awal
+        gsap.set(".paper-container", { opacity: 0 });
+        gsap.set(".fold1", { rotationX: -90 });
+        gsap.set(".fold2", { rotationX: -90, opacity: 0 });
+        gsap.set(".fold3", { rotationX: -90, opacity: 0 });
+
+        // Timeline berurutan
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".paper-section",
+                start: "top top",
+                end: `top+=${totalScroll} top`, // sesuai device
+                scrub: 1,
+            }
+        });
+
+        // Fade-in container dulu
+        tl.to(".paper-container", { opacity: 1, duration: 0.2 });
+
+        // Step 1: buka lipatan pertama
+        tl.to(".fold1", {
+            rotationX: 0,
+            duration: 1
+        });
+
+        // Step 2: buka lipatan kedua
+        tl.to(".fold2", {
+            rotationX: 0,
+            opacity: 1,
+            duration: 1
+        });
+
+        // Step 3: buka lipatan ketiga
+        tl.to(".fold3", {
+            rotationX: 0,
+            opacity: 1,
+            duration: 1
+        });
     </script>
 
 </body>
