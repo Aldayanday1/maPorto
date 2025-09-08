@@ -432,7 +432,16 @@
 
             document.addEventListener("mouseup", () => state.isDragging = false);
 
-            window.addEventListener("resize", initializeSlides);
+            window.addEventListener("resize", () => {
+                const oldSlideWidth = state.slideWidth;
+                checkMobile(); // update state.isMobile & slideWidth
+
+                // jika slideWidth berubah, recalc posisi track
+                if (state.slideWidth !== oldSlideWidth) {
+                    updateSlidePositions();
+                    updateParallax();
+                }
+            });
 
             // FILTER PILLS
             document.querySelectorAll(".filter-pill").forEach(pill => {
