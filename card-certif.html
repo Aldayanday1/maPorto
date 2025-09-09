@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Sertif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PP Neue Montreal", sans-serif;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero,
+        .outro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1em;
+            background-color: #202020;
+            /* contoh warna, bisa diganti */
+            color: #fff;
+        }
+
+        .hero h1,
+        .outro h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .sticky-cards {
+            background-color: #e3e3e3;
+        }
+
+        .card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            width: 25%;
+            height: 50%;
+            padding: 0.5em;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            background-color: #202020;
+            color: #fff;
+        }
+
+        .card-image {
+            flex: 1 1 0;
+            min-height: 0;
+            width: 100%;
+        }
+
+        .card-content {
+            flex: 0 0 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-content p {
+            text-transform: uppercase;
+            font-family: "Akkurat Mono";
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 75%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero">
+        <h1>Future threads a factured the world</h1>
+    </section>
+    <section class="sticky-cards">
+        <div class="card">
+            <div class="card-image"><img src="images/build-1.jpg" alt=""></div>
+            <div class="card-content">X01-842</div>
+        </div>
+        <div class="card">
+            <div class="card-image"><img src="images/build-2.jpg" alt=""></div>
+            <div class="card-content">X01-842</div>
+        </div>
+        <div class="card">
+            <div class="card-image"><img src="images/build-3.jpg" alt=""></div>
+            <div class="card-content">X01-842</div>
+        </div>
+        <div class="card">
+            <div class="card-image"><img src="images/build-4.jpg" alt=""></div>
+            <div class="card-content">X01-842</div>
+        </div>
+        <div class="card">
+            <div class="card-image"><img src="images/build-1.jpg" alt=""></div>
+            <div class="card-content">X01-842</div>
+        </div>
+        <div class="card">
+            <div class="card-image"><img src="images/build-2.jpg" alt=""></div>
+            <div class="card-content">X01-842</div>
+        </div>
+    </section>
+    <section class="outro">
+        <h1>Tomorrow, tailored.</h1>
+    </section>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const lenis = new Lenis();
+
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+
+            const cards = gsap.utils.toArray(".card");
+            const rotations = [-12, 10, -5, 5, -5, -2];
+
+            cards.forEach((card, index) => {
+                gsap.set(card, {
+                    y: window.innerHeight,
+                    rotate: rotations[index]
+                });
+            });
+
+            ScrollTrigger.create({
+                trigger: ".sticky-cards",
+                start: "top top",
+                end: `+=${window.innerHeight * 8}px`,
+                pin: true,
+                pinSpacing: true,
+                scrub: 1,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    const totalCards = cards.length;
+                    const progressPerCard = 1 / totalCards;
+
+                    cards.forEach((card, index) => {
+                        const cardStart = index * progressPerCard;
+                        let cardProgress = (progress - cardStart) / progressPerCard;
+                        cardProgress = Math.min(Math.max(cardProgress, 0), 1);
+
+                        let yPos = window.innerHeight * (1 - cardProgress);
+                        let xPos = 0;
+
+                        if (cardProgress === 1 && index < totalCards - 1) {
+                            const remainingProgress = (progress - (cardStart + progressPerCard)) / (1 - (cardStart + progressPerCard));
+
+                            if (remainingProgress > 0) {
+                                const distanceMultiplier = 1 - index * 0.15;
+                                xPos = -window.innerWidth * 0.3 * distanceMultiplier * remainingProgress;
+                                yPos = -window.innerHeight * 0.3 * distanceMultiplier * remainingProgress;
+                            }
+                        }
+
+                        gsap.to(card, {
+                            y: yPos,
+                            x: xPos,
+                            duration: 0,
+                            ease: "none",
+                        })
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
