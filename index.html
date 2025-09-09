@@ -718,24 +718,11 @@
             <div class="fold fold3"><img src="images/paper.png" alt="Fold 3"></div>
         </div>
         <div class="content">
-            <a href="files/CV_MochamadAldi.pdf" class="btn-download" id="downloadCV">
-                <i class="fa-solid fa-download"></i> Download CV
+            <a href="files/CV_MochamadAldi.pdf" download class="btn-download">
+                <i class="fa-solid fa-arrow-down"></i> Download CV
             </a>
         </div>
     </section>
-
-    <script>
-        const btn = document.getElementById("downloadCV");
-
-        btn.addEventListener("click", function (e) {
-            e.preventDefault(); // hentikan dulu aksi default link
-            const proceed = confirm("Apakah Anda ingin men-download CV?");
-            if (proceed) {
-                // jika user klik OK, lanjutkan download
-                window.location.href = this.href;
-            }
-        });
-    </script>
 
     <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
