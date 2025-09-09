@@ -4,137 +4,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Experience Timeline</title>
+    <title>AI Chatbot - WebLLM</title>
     <style>
         body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f0f0f0;
-        }
-
-        .timeline-section {
-            position: relative;
-            width: 80%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 5rem 0;
-        }
-
-        .timeline-line {
-            position: absolute;
-            top: 0;
-            left: 20px;
-            width: 4px;
-            height: 0;
-            /* start from 0 */
-            background: #3498db;
-            transform-origin: top;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin: 5rem 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
             display: flex;
-            align-items: flex-start;
-        }
-
-        .timeline-dot {
-            width: 16px;
-            height: 16px;
-            background: #3498db;
-            border-radius: 50%;
-            margin-right: 1rem;
-            transform: scale(0);
-            /* hide initially */
-        }
-
-        .timeline-content {
-            opacity: 0;
-            /* hide initially */
-            transform: translateY(20px);
-        }
-
-        .timeline-content h3 {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            font-size: 1.2rem;
         }
 
-        .timeline-content p {
-            margin: 0.2rem 0 0 0;
-            font-size: 0.9rem;
+        .chat-container {
+            width: 400px;
+            max-width: 95%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 500px;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px 14px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user {
+            background: #444;
+            color: #fff;
+            margin-left: auto;
+        }
+
+        .bot {
+            background: #e5e5ea;
+            color: #000;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .chat-input button {
+            border: none;
+            background: #444;
+            color: #fff;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .chat-input button:hover {
+            background: #666;
         }
     </style>
 </head>
 
 <body>
-    <section class="timeline-section">
-        <div class="timeline-line"></div>
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Job Title 1</h3>
-                <p>Company 1 | 2020 - 2021</p>
-            </div>
+    <div class="chat-container">
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot">Halo! Saya AI asisten pribadi Aldi. Apa yang ingin kamu ketahui? 😊</div>
         </div>
-
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Job Title 2</h3>
-                <p>Company 2 | 2021 - 2022</p>
-            </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ketik pesan..." />
+            <button id="send-btn">Kirim</button>
         </div>
+    </div>
 
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Job Title 3</h3>
-                <p>Company 3 | 2022 - Present</p>
-            </div>
-        </div>
-    </section>
+    <script type="module">
+        import { CreateWebWorkerMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
+        let engine;
+        const chatMessages = document.getElementById("chat-messages");
+        const userInput = document.getElementById("user-input");
+        const sendBtn = document.getElementById("send-btn");
 
-        // 1️⃣ Reset semua item & dot
-        gsap.set(".timeline-line", { height: 0 });
-        gsap.set(".timeline-dot", { scale: 0 });
-        gsap.set(".timeline-content", { opacity: 0, y: 20 });
-
-        // 2️⃣ Animasi garis vertikal sesuai scroll
-        gsap.to(".timeline-line", {
-            height: "100%",
-            scrollTrigger: {
-                trigger: ".timeline-section",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true
-            }
-        });
-
-        // 3️⃣ Animasi titik & konten saat garis mencapai item
-        document.querySelectorAll(".timeline-item").forEach((item) => {
-            const dot = item.querySelector(".timeline-dot");
-            const content = item.querySelector(".timeline-content");
-
-            ScrollTrigger.create({
-                trigger: item,
-                start: "top center", // saat garis mencapai titik tengah item
-                onEnter: () => {
-                    gsap.to(dot, { scale: 1, duration: 0.5, ease: "back.out(1.7)" });
-                    gsap.to(content, { opacity: 1, y: 0, duration: 0.5, ease: "power1.out" });
-                },
-                onLeaveBack: () => {
-                    gsap.to(dot, { scale: 0, duration: 0.3 });
-                    gsap.to(content, { opacity: 0, y: 20, duration: 0.3 });
+        async function initAI() {
+            engine = await CreateWebWorkerMLCEngine(
+                "Llama-3-8B-Instruct-q4f32_1-MLC",
+                {
+                    initProgressCallback: (progress) => {
+                        console.log("Loading progress:", progress);
+                    }
                 }
+            );
+        }
+
+        function addMessage(content, sender) {
+            const div = document.createElement("div");
+            div.className = "message " + sender;
+            div.textContent = content;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function handleUserMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+            addMessage(text, "user");
+            userInput.value = "";
+
+            // AI Reply
+            const reply = await engine.chat.completions.create({
+                messages: [
+                    { role: "system", content: "Kamu adalah AI pribadi Mochamad Aldi. Jawab hanya tentang dirinya, pengalaman, skill, dan portofolionya." },
+                    { role: "user", content: text }
+                ]
             });
+
+            addMessage(reply.choices[0].message.content, "bot");
+        }
+
+        sendBtn.addEventListener("click", handleUserMessage);
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") handleUserMessage();
         });
+
+        // Start AI
+        initAI();
     </script>
 </body>
 
